@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-5">
+    <div class="card py-3">
+      <div class="card-body">
+        <div class="text-center">
+          <img class="rounded rounded-circle img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+        </div>
+        <h4 class="card-title text-center"><%= @user.name %></h4>
+        <div class="flex">
+          <p><a href="#">投稿</a></p>
+          <p><a href="#">フォロー</a></p>
+          <p><a href="#">フォロワー</a></p>
+        </div>
+        <div class="text-center">
+          <%= link_to 'プロフィールを編集する', edit_user_path(@user) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <h3>□ユーザー詳細</h3>
+    <ul class="nav nav-tabs nav-justified mb-3">
+      <li class="nav-item"><a href="#" class="nav-link">My記事</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">お気に入り</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">自己紹介</a></li>
+    </ul>
+  </div>
+</div>
+
+
