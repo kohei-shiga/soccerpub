@@ -15,7 +15,12 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :articles, only: [:show, :new, :create, :destroy]
+  resources :articles, only: [:show, :new, :create, :destroy] do
+    collection do
+      get :timeline
+    end
+  end
+  
   resources :relationships, only: [:create, :destroy]
 
 end

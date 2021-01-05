@@ -126,6 +126,10 @@
    flex-direction: column;
    align-items: flex-start;
  }
+ .toppage-main_start a {
+   color: #777;
+   text-decoration: none;
+ }
  
  .toppage-main_end {
    flex-grow: 1;

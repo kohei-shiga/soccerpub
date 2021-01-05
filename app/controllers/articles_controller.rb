@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :require_user_logged_in, only: [:new, :create, :destroy]
+  before_action :require_user_logged_in, only: [:new, :create, :destroy, :timeline]
   before_action :correct_user, only: [:destroy]
   
   def index
@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build(article_params)
     if @article.save
       flash[:success] = '記事を投稿しました。'
-      redirect_to 'users/show'
+      redirect_to root_url
     else
       flash.now[:danger] = 'メッセージの投稿に失敗しました。'
       render :new
@@ -30,6 +30,10 @@ class ArticlesController < ApplicationController
     @article.destroy
     flash[:success] = '記事を削除しました。'
     redirect_back(fallback_location: root_path)
+  end
+  
+  def timeline
+    @articles = Article.where(user_id: current_user.following_ids + [current_user.id])
   end
   
   private

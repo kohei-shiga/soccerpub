@@ -38,6 +38,9 @@
       <div class="toppage-main_start ml-2">
         <div>記事フィード</div>
         <%= link_to '最新', root_path %>
+        <% if logged_in? %>
+          <%= link_to 'タイムライン', timeline_articles_path %>
+        <% end %>
       </div>
       <div class="toppage-main_end">
           <div class="toppage-main_end-header">
