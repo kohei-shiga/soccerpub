@@ -22,6 +22,9 @@
             <div class="mr-2"><a href="<%= user_path(@article.user) %>"><img src="<%= gravatar_url(@article.user, { size: 30 }) %>"></a></div>
             <div><a href="<%= user_path(@article.user) %>"><%= @article.user.name %></a></div>
           </div>
+          <div class="mt-3">
+            <%= render 'relationships/follow_button', user: @user %>
+          </div>
         </div>
           
       </div>
