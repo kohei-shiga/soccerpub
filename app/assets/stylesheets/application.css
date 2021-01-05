@@ -1,6 +1,7 @@
 .container {
   margin: 0 auto;
   padding: 0;
+  max-width: none;
 }
 .flex {
   display: flex;
@@ -17,6 +18,201 @@
   max-width: 30%;
   height: auto;
 }
+
+.title {
+  display: flex;
+  position: relative;
+}
+
+.box {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-color: #55c500;
+  margin-right: 8px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* _article.html.erb*/
+.user-article {
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 16px;
+}
+
+.article-header {
+  display: flex;
+}
+
+.article-header-left {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.user-article h2 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+.user-article h2 a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.87);
+}
+/* トップページ　*/
+
+/* 上部 */
+.home {
+  margin-top: -56px;
+}
+.toppage-hero {
+  display: flex;
+  width: 100%;
+  padding: 72px 32px 32px;
+  height: 600px;
+  align-items: center;
+}
+
+.toppage-hero_inner {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1100px;
+  align-items: center;
+}
+
+.toppage-hero_start {
+  width: 60%;
+}
+
+.toppage-hero_end {
+  width: 30%;
+  min-width: 305px;
+}
+
+@media screen and (max-width: 768px) {
+  .toppage-hero {
+    padding: 104px 24px 64px;
+  }
+  .toppage-hero_inner {
+    flex-wrap: wrap;
+  }
+  .toppage-hero_start {
+    width: 100%;
+  }
+  .toppage-hero_end {
+    display: none;
+  }
+}
+ /* 下部 */
+ .toppage-main {
+   padding-top: 32px;
+ }
+ .toppage-main_inner {
+   display: flex;
+   flex-flow: row wrap;
+   align-items: flex-start;
+   max-width: 1100px;
+   margin-right: auto;
+   margin-left: auto;
+ }
+ 
+ .toppage-main_start {
+   width: 200px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+ }
+ 
+ .toppage-main_end {
+   flex-grow: 1;
+   width: 0;
+   min-width: 0;
+   border: 1px solid transparent;
+ }
+ 
+ .toppage-main_end-header {
+   display: flex;
+  }
+ 
+ @media (max-width: 770px) {
+   .toppage-main_start {
+     flex: 1 0 auto;
+     flex-direction: row;
+     align-items: center;
+     width: 100%;
+     overflow-x: auto;
+     position: static;
+   }
+   .toppage-main_start div {
+     margin-right: 5px;
+   }
+ }
+ 
+ /* article 詳細ページ*/
+ .show-wrapper {
+   background-color: #f6f6f4;
+ }
+ 
+ .wrapper-container {
+   padding-top: 24px;
+   padding-bottom: 40px;
+ }
+ 
+ .wrapper-container-article {
+   background-color: #fff;
+   padding: 32px;
+ }
+ 
+ .header_info {
+   display: flex;
+   width: 100%;
+   align-items: center;
+ }
+ .author {
+   display: flex;
+   align-items: center;
+ }
+ 
+.author a {
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: #000;
+}
+ 
+.header_time {
+  color: #999;
+}
+
+.article-show-header-title {
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 1.4;
+}
+
+.wrapper-container-article-content {
+  font-size: 1.4rem;
+  color: #333;
+}
+
+@media (max-width: 1200px) {
+  .wrapper-container-article {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 991px) {
+  .wrapper-container-article {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}
+
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.

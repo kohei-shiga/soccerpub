@@ -1,0 +1,53 @@
+<div class="home">
+  <% if current_user == nil %>
+    <div class="toppage-hero">
+      <div class="toppage-hero_inner">
+        <div class="toppage-hero_start">
+          <h1>SoccerPub</h1>
+          <p>SoccerPubは、サッカーに関する話題を共有し、自分の応援するチームのファンと繋がれるアプリです。</p>
+        </div>
+        <div class="toppage-hero_end">
+          <%= form_with(model: @user, local: true) do |f| %>
+            
+            <div class="form-group">
+              <%= f.label :name, 'ユーザー名' %>
+              <%= f.text_field :name, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :email, 'メールアドレス' %>
+              <%= f.email_field :email, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password, 'パスワード' %>
+              <%= f.password_field :password, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password_confirmation, '確認' %>
+              <%= f.password_field :password_confirmation, class: 'form-control' %>
+            </div>
+            
+            <%= f.submit '登録する', class: 'btn btn-primary' %>
+            
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="toppage-main px-2 mt-5">
+    <div class="toppage-main_inner">
+      <div class="toppage-main_start ml-2">
+        <div>記事フィード</div>
+        <%= link_to '最新', root_path %>
+      </div>
+      <div class="toppage-main_end">
+          <div class="toppage-main_end-header">
+            <div><span class="fa fa-laugh-wink"></span></div>
+            <p>最新</p>
+          </div>
+          <div>
+            <%= render 'articles/articles', articles: @articles %>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

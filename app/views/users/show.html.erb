@@ -18,12 +18,16 @@
     </div>
   </div>
   <div class="col-md-7">
-    <h3>□ユーザー詳細</h3>
+    <div class="title mb-2">
+      <div class="box"></div>
+      <div class="ml-4">ユーザー詳細</div>
+    </div>
     <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">My記事</a></li>
+      <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">My記事</a></li>
       <li class="nav-item"><a href="#" class="nav-link">お気に入り</a></li>
       <li class="nav-item"><a href="#" class="nav-link">自己紹介</a></li>
     </ul>
+    <%= render 'articles/articles', articles: @articles, user: @user %>
   </div>
 </div>
 
