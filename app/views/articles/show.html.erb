@@ -16,6 +16,9 @@
         <section class="wrapper-container-article-content border-top py-3">
           <div class="mb-3">内容</div>
           <div><%= @article.content %></div>
+          <div class="mt-3">
+            <%= render 'favorites/favorite_button', article: @article %>
+          </div>
         </section>
         <div class="wrapper-container-article-footer border-top py-3">
           <div class="author mr-3">

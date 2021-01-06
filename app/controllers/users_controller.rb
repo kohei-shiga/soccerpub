@@ -50,6 +50,11 @@ class UsersController < ApplicationController
     counts(@user)
   end
   
+  def favorite_articles
+    @user = User.find(params[:id])
+    @articles = @user.favorite_articles
+  end
+  
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :introduction)

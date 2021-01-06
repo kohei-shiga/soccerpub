@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @user = @article.user
+    @count_favorites = @article.liked_users.count
   end
 
   def new
@@ -34,6 +35,10 @@ class ArticlesController < ApplicationController
   
   def timeline
     @articles = Article.where(user_id: current_user.following_ids + [current_user.id])
+  end
+  
+  def favorite_articles
+    @articles = current_user.favorite_articles
   end
   
   private

@@ -129,6 +129,8 @@
  .toppage-main_start a {
    color: #777;
    text-decoration: none;
+   margin-left: 10px;
+   font-size: 0.8rem;
  }
  
  .toppage-main_end {
