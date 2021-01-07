@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :require_user_logged_in, only: [:new, :create, :destroy, :timeline]
+  before_action :require_user_logged_in, only: [:new, :create, :destroy, :timeline, :favorite_articles, :tagged_articles]
   before_action :correct_user, only: [:destroy]
   
   def index
@@ -18,7 +18,11 @@ class ArticlesController < ApplicationController
 
   def create
     @article = current_user.articles.build(article_params)
+    
     if @article.save
+      tag_list = params[:tag_name].split(',')
+      tag_list.map!{ |o| o.strip }
+      @article.save_articles(tag_list)
       flash[:success] = '記事を投稿しました。'
       redirect_to root_url
     else
@@ -39,6 +43,10 @@ class ArticlesController < ApplicationController
   
   def favorite_articles
     @articles = current_user.favorite_articles
+  end
+  
+  def tagged_articles
+    @articles = current_user.following_tags.map{ |o| o.tagged_articles.to_ary }.flatten.uniq
   end
   
   private

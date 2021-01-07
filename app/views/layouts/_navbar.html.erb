@@ -5,7 +5,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse justify-content-end navbar-content" id="navbarSupportedContent">
+      <p><%= link_to '投稿する', new_article_path %></p>
       <ul class="navbar-nav">
         <% if logged_in? %>
           <li class="nav-item dropdown">

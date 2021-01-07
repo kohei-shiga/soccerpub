@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-5">
+    <div class="card py-3">
+      <div class="card-body">
+        <!--<div class="text-center">-->
+        <!--  <img class="rounded rounded-circle img-fluid" src=") %>" alt="">-->
+        <!--</div>-->
+        <h4 class="card-title text-center"><%= @tag.name %></h4>
+        <div class="count-the-num-article-follower mt-5">
+          <div>
+            <p>記事</p>
+            <p><%= @count_tagged_articles %></p>
+          </div>
+          <div>
+            <p>フォロワー</p>
+            <p><%= @count_tag_following_users %></p>
+          </div>
+        </div>
+        <div class="text-center">
+          <%= render 'tag_follows/tag_follow_button', tag: @tag %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="title mb-2">
+      <div class="box"></div>
+      <div class="ml-4">最新</div>
+    </div>
+    <%= render 'articles/articles', articles: @articles %>
+  </div>
+</div>

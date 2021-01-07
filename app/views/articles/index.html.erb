@@ -41,6 +41,7 @@
         <% if logged_in? %>
           <%= link_to 'タイムライン', timeline_articles_path %>
           <%= link_to 'お気に入り', favorite_articles_articles_path %>
+          <%= link_to 'タグ', tagged_articles_articles_path %>
         <% end %>
       </div>
       <div class="toppage-main_end">

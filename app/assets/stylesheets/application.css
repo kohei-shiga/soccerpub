@@ -3,6 +3,18 @@
   padding: 0;
   max-width: none;
 }
+.navbar-content {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-content p {
+  margin: 0 20px 0 0;
+}
+.navbar-content p a {
+  text-decoration: none;
+  color: #fff;
+}
 .flex {
   display: flex;
   justify-content: space-between;
@@ -158,6 +170,23 @@
    }
  }
  
+ /* _article.html.erb パーシャル */
+ .tag-container {
+   display: flex;
+ }
+ .tag-field {
+   display: flex;
+ }
+ 
+ .tag-field li {
+   list-style: none;
+ }
+ 
+ .tag-field li a {
+   text-decoration: none;
+   color: #888;
+ }
+ 
  /* article 詳細ページ*/
  .show-wrapper {
    background-color: #f6f6f4;
@@ -195,12 +224,11 @@
 
 .article-show-header-title {
   font-weight: bold;
-  font-size: 3rem;
   line-height: 1.4;
 }
 
 .wrapper-container-article-content {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   color: #333;
 }
 
@@ -218,7 +246,15 @@
   }
 }
 
+/* タグ詳細ページ　*/
+.count-the-num-article-follower {
+  display: flex;
+  justify-content: space-around;
+}
 
+.count-the-num-article-follower div {
+  text-align: center;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.

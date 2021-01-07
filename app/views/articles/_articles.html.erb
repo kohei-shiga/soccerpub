@@ -8,7 +8,16 @@
         </div>
         <div class="ml-2 article-header-left">が<%= article.created_at %>に投稿</div>
       </header>
-      <h2><a href="<%= article_path(article) %>"><%= article.title %></a></h2>
+      <h2 class="mt-1"><a href="<%= article_path(article) %>"><%= article.title %></a></h2>
+      <div class="tag-container">
+        <p>タグ</p>
+        <ul class="tag-field">
+          <% article.attached_tags.each do |tag| %>
+            <li class="mr-2"><%= link_to tag.name, tag %></li>
+          <% end %>
+        </ul>
+      </div>
+     
     </article>
   <% end %>
 </div>

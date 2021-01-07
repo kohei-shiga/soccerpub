@@ -11,6 +11,9 @@ class User < ApplicationRecord
     has_many :favorites
     has_many :favorite_articles, through: :favorites, source: :article
     
+    has_many :tag_follows
+    has_many :following_tags, through: :tag_follows, source: :tag
+    
     validates :name, presence: true, length: { maximum: 20 }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :email, presence: true, length: { maximum: 255 },
@@ -44,6 +47,20 @@ class User < ApplicationRecord
     
     def favorite?(article)
         self.favorite_articles.include?(article)
+    end
+    
+    #tag_follow機能
+    def tag_follow(tag)
+        self.tag_follows.find_or_create_by(tag_id: tag.id)
+    end
+  
+    def tag_unfollow(tag)
+        tag_follow = self.tag_follows.find_by(tag_id: tag.id)
+        tag_follow.destroy if tag_follow
+    end
+    
+    def tag_following?(tag)
+        self.following_tags.include?(tag)
     end
     
     
