@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     
     if login(email, password)
       flash[:success] = 'ログインしました。'
+      remember @user
       redirect_to root_url
     else
       flash.now[:danger] = 'ログインに失敗しました。'
@@ -16,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    log_out if logged_in?
     flash[:success] = 'ログアウトしました。'
     redirect_to root_url
   end
@@ -26,7 +27,7 @@ class SessionsController < ApplicationController
   def login(email, password)
     @user = User.find_by(email: email)
     if @user && @user.authenticate(password)
-      session[:user_id] = @user.id
+      log_in(@user)
       return true
     else
       return false
