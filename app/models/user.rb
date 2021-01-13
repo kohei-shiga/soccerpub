@@ -23,10 +23,10 @@ class User < ApplicationRecord
                       size: { less_than: 5.megabytes,
                               message: "5MGよりも小さいサイズでなければなりません" }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-    validates :email,
-        presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false },
-        format: { with: VALID_EMAIL_REGEX, allow_blank: true }
-    # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+    
+    validates :email, presence: true, length: { maximum: 255 },
+                      format: { with: VALID_EMAIL_REGEX, allow_blank: true }, uniqueness: { case_sensitive: false }
+    validates :password, presence: true, length: { minimum: 8, maximum: 20 }, allow_nil: true 
     
     def follow(other_user)
         unless self == other_user
