@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def index
+    @user = User.new
     @articles = Article.all.order(created_at: :desc)
   end
   

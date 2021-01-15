@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     
     if login(email, password)
       flash[:success] = 'ログインしました。'
-      remember @user
+      params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
       redirect_to root_url
     else
       flash.now[:danger] = 'ログインに失敗しました。'
@@ -27,8 +27,15 @@ class SessionsController < ApplicationController
   def login(email, password)
     @user = User.find_by(email: email)
     if @user && @user.authenticate(password)
-      log_in(@user)
-      return true
+      if @user.activated?
+        log_in(@user)
+        return true
+      else
+        message = "アカウントが有効化されていません。"
+        message += "アカウント有効化用のメールをご確認ください。"
+        flash[:warning] = message
+        redirect_to root_url
+      end
     else
       return false
     end

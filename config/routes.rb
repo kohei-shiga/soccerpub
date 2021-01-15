@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get :favorite_articles
     end
   end
+  resources :account_activations, only: [:edit]
   
   resources :articles, only: [:show, :new, :create, :destroy] do
     collection do
