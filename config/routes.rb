@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/edit'
   get 'tag_follows/create'
   get 'tag_follows/destroy'
   root to: 'articles#index'
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
     end
   end
   resources :account_activations, only: [:edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
   
   resources :articles, only: [:show, :new, :create, :destroy] do
     collection do
