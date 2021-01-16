@@ -34,7 +34,7 @@
             <div><a href="<%= user_path(@article.user) %>"><%= @article.user.name %></a></div>
           </div>
           <div class="mt-3">
-            <%= render 'relationships/follow_button', user: @user %>
+            <%= render 'users/follow_form', user: @user %>
           </div>
         </div>
           

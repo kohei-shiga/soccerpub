@@ -1,13 +1,9 @@
 <% if logged_in? %>
-  <% if current_user.tag_following?(tag) %>
-    <%= form_with(model: current_user.tag_follows.find_by(tag_id: tag.id), local: true, method: :delete) do |f| %>
-      <%= hidden_field_tag :tag_id, tag.id %>
-      <%= f.submit '記事のフォローを外す', class: 'btn btn-danger' %>
+  <div id="tag_follow_button">
+    <% if current_user.tag_following?(tag) %>
+      <%= render 'tags/unfollow', tag: tag %>
+    <% else %>
+      <%= render 'tags/follow', tag: tag %>
     <% end %>
-  <% else %>
-    <%= form_with(model: current_user.tag_follows.build, local: true) do |f| %>
-      <%= hidden_field_tag :tag_id, tag.id %>
-      <%= f.submit '記事をフォローする', class: 'btn btn-primary' %>
-    <% end %>
-  <% end %>
+  </div>
 <% end %>

@@ -1,13 +1,9 @@
 <% if logged_in? %>
-  <% if current_user.favorite?(article) %>
-    <%= form_with(model: current_user.favorites.find_by(article_id: article.id), local: true, method: :delete) do |f| %>
-      <%= hidden_field_tag :article_id, article.id %>
-      <%= f.submit 'Unlike', class: 'btn btn-danger' %>
+  <div id="favorite_button">
+    <% if current_user.favorite?(article) %>
+      <%= render 'unfavorite', article: article %>
+    <% else %>
+      <%= render 'favorite', article: article %>
     <% end %>
-  <% else %>
-    <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
-      <%= hidden_field_tag :article_id, article.id %>
-      <%= f.submit 'Like!', class: 'btn btn-primary' %>
-    <% end %>
-  <% end %>
+  </div>
 <% end %>

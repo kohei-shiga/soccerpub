@@ -1,0 +1,4 @@
+<%= form_with(model: current_user.favorites.find_by(article_id: article.id), method: :delete) do |f| %>
+  <%= hidden_field_tag :article_id, article.id %>
+  <%= f.submit 'Unlike', class: 'btn btn-danger' %>
+<% end %>

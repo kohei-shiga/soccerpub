@@ -1,0 +1,4 @@
+<%= form_with(model: current_user.tag_follows.find_by(tag_id: tag.id), method: :delete) do |f| %>
+  <%= hidden_field_tag :tag_id, tag.id %>
+  <%= f.submit '記事のフォローを外す', class: 'btn btn-danger' %>
+<% end %>

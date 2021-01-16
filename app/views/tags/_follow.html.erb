@@ -1,0 +1,4 @@
+<%= form_with(model: current_user.tag_follows.build) do |f| %>
+  <%= hidden_field_tag :tag_id, tag.id %>
+  <%= f.submit '記事をフォローする', class: 'btn btn-primary' %>
+<% end %>

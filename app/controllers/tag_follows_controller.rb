@@ -4,12 +4,12 @@ class TagFollowsController < ApplicationController
   def create
     @tag = Tag.find(params[:tag_id])
     current_user.tag_follow(@tag)
-    redirect_to @tag
+    count_tag_following_users(@tag)
   end
 
   def destroy
     @tag = Tag.find(params[:tag_id])
     current_user.tag_unfollow(@tag)
-    redirect_to @tag
+    count_tag_following_users(@tag)
   end
 end

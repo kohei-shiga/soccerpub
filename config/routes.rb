@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-  get 'password_resets/edit'
-  get 'tag_follows/create'
-  get 'tag_follows/destroy'
   root to: 'articles#index'
  
   get 'login', to: 'sessions#new'

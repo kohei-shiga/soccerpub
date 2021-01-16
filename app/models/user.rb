@@ -21,7 +21,7 @@ class User < ApplicationRecord
     validates :email,
         presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false },
         format: { with: VALID_EMAIL_REGEX, allow_blank: true }
-    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+    # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
     
     def follow(other_user)
         unless self == other_user

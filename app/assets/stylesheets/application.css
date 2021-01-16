@@ -271,6 +271,10 @@
   width: auto;
   margin-left: 0;
 }
+
+#error_explanation ul #text {
+  display: none;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
