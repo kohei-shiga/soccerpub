@@ -5,6 +5,7 @@ ruby '2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
+gem 'active_storage_validations', '0.8.2'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4'
 # Use Puma as the app server
@@ -46,6 +47,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari'
 
-group :production do
-  gem 'pg', '>= 0.18', '< 2.0'
-end
+gem 'aws-sdk-s3', require: false
+
+#本番環境で消した
+# group :production do
+#   gem 'pg', '>= 0.18', '< 2.0'
+# end

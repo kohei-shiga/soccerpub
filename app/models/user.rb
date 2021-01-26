@@ -3,6 +3,7 @@ class User < ApplicationRecord
     before_save :downcase_email
     before_create :create_activation_digest
     has_secure_password
+    has_one_attached :image
     has_many :articles
     
     has_many :relationships
@@ -17,6 +18,10 @@ class User < ApplicationRecord
     has_many :following_tags, through: :tag_follows, source: :tag
     
     validates :name, presence: true, length: { maximum: 20 }
+    validates :image, content_type: { in: %w[image/jpeg image/gif image/png],
+                                      massage: "適切な画像フォーマットでなければなりません" },
+                      size: { less_than: 5.megabytes,
+                              message: "5MGよりも小さいサイズでなければなりません" }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :email,
         presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false },
@@ -108,6 +113,10 @@ class User < ApplicationRecord
     
     def password_reset_expired?
         reset_sent_at < 2.hours.ago
+    end
+    
+    def display_image
+        image.variant(resize_to_limit: [200,200])
     end
     
     private

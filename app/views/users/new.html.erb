@@ -13,6 +13,10 @@
         <%= f.text_field :name, class: 'form-control' %>
       </div>
       <div class="form-group">
+        <%= f.label :image, 'ユーザー画像' %>
+        <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png",  class: 'form-control' %>
+      </div>
+      <div class="form-group">
         <%= f.label :email, 'メールアドレス' %>
         <%= f.email_field :email, class: 'form-control' %>
       </div>
@@ -27,5 +31,15 @@
       
       <%= f.submit '登録する', class: 'btn btn-primary btn-block' %>
     <% end %>
+    
+    <script type="text/javascript">
+      $("#user_image").bind("change", function() {
+        var size_in_megabytes = this.files[0].size/1024/1024;
+        if (size_in_megabytes > 5) {
+          alert("画像ファイルは5MBよりも小さいものにしてください");
+          $("#user_image").val("");
+        }
+      });
+    </script>
   </div>
 </div>
