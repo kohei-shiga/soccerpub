@@ -1,16 +1,13 @@
 class Article < ApplicationRecord
-  belongs_to :user
-  has_one_attached :image
   has_rich_text :content
-  
+  belongs_to :user
+
   has_many :reverses_of_favorite, class_name: 'Favorite'
   has_many :liked_users, through: :reverses_of_favorite, source: :user
   
   has_many :reverses_of_tag_maps, class_name: 'TagMap', dependent: :destroy
   has_many :attached_tags, through: :reverses_of_tag_maps, source: :tag
 
-  validates :content, presence: true, length: { maximum: 1000 }
-  
   def save_articles(savearticle_tags)
     current_tags = self.attached_tags.pluck(:name) unless self.attached_tags.nil?
     old_tags = current_tags - savearticle_tags

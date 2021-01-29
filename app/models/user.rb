@@ -119,6 +119,14 @@ class User < ApplicationRecord
         image.variant(resize_to_limit: [200,200])
     end
     
+    def index_display_image
+        image.variant(resize_to_limit: [30,30])
+    end
+    
+    def navbar_display_image
+        image.variant(resize_to_limit: [50,50])
+    end
+    
     private
     
         def downcase_email

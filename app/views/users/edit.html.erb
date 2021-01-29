@@ -3,7 +3,7 @@
     <div class="card py-3">
       <div class="card-body">
         <div class="text-center">
-          <img class="rounded rounded-circle img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+          <%= image_tag @user.display_image, class: 'rounded rounded-circle img-fluid border border-dark' if @user.image.attached? %>
         </div>
         <h4 class="card-title text-center"><%= @user.name %></h4>
         <div class="flex">
