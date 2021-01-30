@@ -6,6 +6,12 @@
     </button>
     
     <div class="collapse navbar-collapse justify-content-end navbar-content" id="navbarSupportedContent">
+      <div class="fuzzy_search mr-5">
+        <%= form_tag(searches_path, method: :get) do %>
+          <%= text_field_tag :search, "", placeholder: 'タイトルで検索' %>
+          <%= submit_tag '検索', size: 30*30 %>
+        <% end %>
+      </div>
       <p><%= link_to '投稿する', new_article_path %></p>
       <ul class="navbar-nav">
         <% if logged_in? %>

@@ -22,4 +22,12 @@ class Article < ApplicationRecord
       self.attached_tags << article_tag
     end
   end
+  
+  def self.search(search)
+    if search
+      Article.where(['title LIKE ?', "%#{search}%"])
+    else
+      return Article.all
+    end
+  end
 end
