@@ -19,7 +19,6 @@ class ArticlesController < ApplicationController
 
   def create
     @article = current_user.articles.build(article_params)
-    
     if @article.save
       tag_list = params[:tag_name].split(',')
       tag_list.map!{ |o| o.strip }

@@ -6,11 +6,17 @@
     </button>
     
     <div class="collapse navbar-collapse justify-content-end navbar-content" id="navbarSupportedContent">
+      <div class="fuzzy_search mr-5">
+        <%= form_tag(searches_path, method: :get) do %>
+          <%= text_field_tag :search, "", placeholder: 'タイトルで検索' %>
+          <%= submit_tag '検索', size: 30*30 %>
+        <% end %>
+      </div>
       <p><%= link_to '投稿する', new_article_path %></p>
       <ul class="navbar-nav">
         <% if logged_in? %>
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><img class="rounded rounded-circle img-fluid" src="<%= gravatar_url(current_user, { size: 30 }) %>"></a>
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= image_tag current_user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if current_user.image.attached? %></a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-item"><%= link_to 'マイページ', user_path(current_user) %></li>
                 <li class="dropdown-divider"></li>

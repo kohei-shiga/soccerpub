@@ -37,18 +37,30 @@
     <div class="toppage-main_inner">
       <div class="toppage-main_start ml-2">
         <div>記事フィード</div>
-        <%= link_to '最新', root_path %>
-        <% if logged_in? %>
-          <%= link_to 'タイムライン', timeline_articles_path %>
-          <%= link_to 'お気に入り', favorite_articles_articles_path %>
-          <%= link_to 'タグ', tagged_articles_articles_path %>
-        <% end %>
+        <ul>
+          <li><%= link_to '最新', root_path %></li>
+          <% if logged_in? %>
+            <li><%= link_to 'タイムライン', timeline_articles_path %></li>
+            <li><%= link_to 'お気に入り', favorite_articles_articles_path %></li>
+            <li><%= link_to 'タグ', tagged_articles_articles_path %></li>
+          <% end %>
+        </ul>
       </div>
       <div class="toppage-main_end">
+        <% if @search %>
+          <div class="search-result">
+            <p class="mb-1"><%= @search %>の検索結果</p>
+            <ul class="nav nav-tabs">
+              <div><span class="fa fa-laugh-wink"></span></div>
+              <li class="active ml-2"><%= @count_search_result %>件見つかりました</li>
+            </ul>
+          </div>
+        <% else %>
           <div class="toppage-main_end-header">
             <div><span class="fa fa-laugh-wink"></span></div>
             <p>最新</p>
           </div>
+        <% end %>
           <div>
             <%= render 'articles/articles', articles: @articles %>
           </div>

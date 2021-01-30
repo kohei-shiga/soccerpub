@@ -28,5 +28,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [:create, :destroy]
   resources :tags, only: [:show]
   resources :tag_follows, only: [:create, :destroy]
+  
+  resources :searches, only: [:index]
 
 end

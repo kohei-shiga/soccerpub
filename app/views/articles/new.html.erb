@@ -1,18 +1,16 @@
 <%= form_with(model: @article, local: true) do |f| %>
-  <div class="field">
-    <div class="form-group bg-primary">
-      <%= f.text_field :title, class: 'form-control', placeholder: 'タイトル' %>
-    </div>
-    <div class="form-group bg-secondary">
-      <input name="tag_name" class="form-control" placeholder="タグ">
-    </div>
-    <div class="form-group">
-      <%= f.label :content %>
-      <%= f.rich_text_area :content %>
-    </div>
-    <div>
-      <%= f.submit '投稿する', class: 'btn btn-primary' %>
-    </div>
+  <div class="form-group bg-primary">
+    <%= f.text_field :title, class: 'form-control', placeholder: 'タイトル' %>
+  </div>
+  <div class="form-group bg-secondary">
+    <input name="tag_name" class="form-control" placeholder="タグ">
+  </div>
+  <div class="form-group">
+    <%= f.label :content, '内容' %>
+    <%= f.rich_text_area :content %>
+  </div>
+  <div>
+    <%= f.submit '投稿する', class: 'btn btn-primary' %>
   </div>
 <% end %>
 

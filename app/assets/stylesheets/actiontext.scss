@@ -34,3 +34,13 @@
     }
   }
 }
+trix-editor {
+  border: 2px outset #bbb;
+}
+
+trix-toolbar .trix-button--icon-attach::before {
+  background-image: url(photo.jpg); 
+}
+
+
+

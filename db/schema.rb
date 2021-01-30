@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_22_070360) do
+ActiveRecord::Schema.define(version: 2021_01_26_120638) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -44,11 +44,10 @@ ActiveRecord::Schema.define(version: 2021_01_22_070360) do
   end
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.text "content"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title", limit: 255
+    t.string "title"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
@@ -93,23 +92,23 @@ ActiveRecord::Schema.define(version: 2021_01_22_070360) do
   end
 
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name", limit: 255
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "email", limit: 255
-    t.string "password_digest", limit: 255
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "introduction"
-    t.string "remember_digest", limit: 255
-    t.string "activation_digest", limit: 255
+    t.string "remember_digest"
+    t.string "activation_digest"
     t.boolean "activated", default: false
     t.datetime "activated_at"
-    t.string "reset_digest", limit: 255
+    t.string "reset_digest"
     t.datetime "reset_sent_at"
   end
 
