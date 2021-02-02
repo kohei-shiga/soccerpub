@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   
   def index
     @user = User.new
-    @articles = Article.page(params[:page]).per(8).order(created_at: :desc)
+    @articles = Article.page(params[:page]).order(created_at: :desc)
   end
   
   def show
