@@ -1,7 +1,7 @@
 <% if users.any? %>
   <ul class="list-unstyled">
     <% users.each do |user| %>
-      <li class="media border-bottom">
+      <li class="media border-bottom mb-2">
         <div class="media-body">
           <div class="mb-2">
             <%= link_to user_path(user), class: 'mr-2' do %>

@@ -1,4 +1,4 @@
-<div>
+<div class="mb-5">
   <% articles.each do |article| %>
     <article class="user-article">
       <header class="article-header">
@@ -22,4 +22,5 @@
      
     </article>
   <% end %>
+  <%= paginate articles %>
 </div>
