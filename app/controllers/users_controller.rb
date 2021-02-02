@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @articles = @user.articles
+    @articles = @user.articles.page(params[:page])
     counts(@user)
   end
 
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   
   def favorite_articles
     @user = User.find(params[:id])
-    @articles = @user.favorite_articles
+    @articles = @user.favorite_articles.page(params[:page])
   end
   
   private

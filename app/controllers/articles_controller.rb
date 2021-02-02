@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   
   def index
     @user = User.new
-    @articles = Article.all.order(created_at: :desc)
+    @articles = Article.page(params[:page]).per(8).order(created_at: :desc)
   end
   
   def show
@@ -38,15 +38,16 @@ class ArticlesController < ApplicationController
   end
   
   def timeline
-    @articles = Article.where(user_id: current_user.following_ids + [current_user.id])
+    @articles = Article.where(user_id: current_user.following_ids + [current_user.id]).page(params[:page])
   end
   
   def favorite_articles
-    @articles = current_user.favorite_articles
+    @articles = current_user.favorite_articles.page(params[:page])
   end
   
   def tagged_articles
-    @articles = current_user.following_tags.map{ |o| o.tagged_articles.to_ary }.flatten.uniq
+    articles = current_user.following_tags.map{ |o| o.tagged_articles.to_ary }.flatten.uniq
+    @articles = Kaminari.paginate_array(articles).page(params[:page])
   end
   
   private
