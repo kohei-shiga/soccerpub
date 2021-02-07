@@ -28,6 +28,10 @@ class User < ApplicationRecord
                       format: { with: VALID_EMAIL_REGEX, allow_blank: true }, uniqueness: { case_sensitive: false }
     validates :password, presence: true, length: { minimum: 8, maximum: 20 }, allow_nil: true 
     
+    def feed
+        Article.where("user_id IN (?) OR user_id = ?", following_ids, id)
+    end
+  
     def follow(other_user)
         unless self == other_user
             self.relationships.find_or_create_by(follow_id: other_user.id)

@@ -41,6 +41,9 @@ trix-editor {
 trix-toolbar .trix-button--icon-attach::before {
   background-image: url(photo.jpg); 
 }
+.trix-content action-text-attachment .attachment {
+  text-align: initial;
+}
 
 
 

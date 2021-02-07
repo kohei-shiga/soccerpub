@@ -310,3 +310,13 @@
 #error_explanation ul #text {
   display: none;
 }
+
+/* _users.html.erb */
+
+.media-body div a {
+  text-decoration: none;
+  color: #000;
+}
+.media-body div a:hover {
+  color: blue;
+}

@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Relationship, type: :model do
   describe "validation" do
-    let(:user) { FactoryBot.create(:user) }
-    let(:other_user) { FactoryBot.create(:user) }
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
     let(:relationship) { user.relationships.build(follow_id: other_user.id) }
     
     context "when user_id and follow_id is presence" do
