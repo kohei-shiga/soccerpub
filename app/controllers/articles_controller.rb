@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
   end
   
   def timeline
-    @articles = Article.where(user_id: current_user.following_ids + [current_user.id]).page(params[:page])
+    @articles = current_user.feed.page(params[:page])
   end
   
   def favorite_articles
