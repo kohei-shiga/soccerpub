@@ -36,6 +36,10 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "spring-commands-rspec"
   gem "rspec_junit_formatter"
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
 end
 
 group :development do
@@ -56,10 +60,15 @@ group :test do
  gem 'webmock'
 end
 
+group :production, :staging do
+    gem 'unicorn'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari'
 gem 'faker'
+gem 'dotenv-rails'
 
 gem 'aws-sdk-s3', require: false
 
