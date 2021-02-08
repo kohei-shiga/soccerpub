@@ -47,10 +47,18 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: 5
+#   database: soccerpub_production
+#   username: soccerpub
+#   password: <%= ENV['SOCCERPUB_DATABASE_PASSWORD'] %>
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  database: soccerpub_production
-  username: soccerpub
-  password: <%= ENV['SOCCERPUB_DATABASE_PASSWORD'] %>
+  <<: *default
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOSTNAME'] %>
+
