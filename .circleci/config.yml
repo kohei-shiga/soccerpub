@@ -17,6 +17,10 @@ jobs:
     steps:
       - checkout
       
+      - add_ssh_keys:
+          fingerprints: 
+            - "ee:fb:fd:f8:66:df:c6:58:c7:4e:af:21:64:e3:5c:27"
+      
       - restore_cache:
           keys:
             - rails-demo-yarn-{{ checksum "yarn.lock" }}
