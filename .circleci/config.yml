@@ -17,10 +17,6 @@ jobs:
     steps:
       - checkout
       
-      - add_ssh_keys:
-          fingerprints: 
-            - "ee:fb:fd:f8:66:df:c6:58:c7:4e:af:21:64:e3:5c:27"
-      
       - restore_cache:
           keys:
             - rails-demo-yarn-{{ checksum "yarn.lock" }}
@@ -72,6 +68,21 @@ jobs:
 
       - store_test_results:
           path: /tmp/test-results
+          
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+          
+      - add_ssh_keys:
+          fingerprints: 
+            - "ee:fb:fd:f8:66:df:c6:58:c7:4e:af:21:64:e3:5c:27"
+          
+      - deploy:
+          name: Capistrano deploy
+          command:
+　　　　　　  bundle exec cap production deploy    
+          
+          
+          
+          
+        
