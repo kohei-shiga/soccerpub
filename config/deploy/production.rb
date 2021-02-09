@@ -1,5 +1,8 @@
 server '54.199.94.164', user: 'kohei', roles: %w{app db web}
-set :ssh_options, keys: '~/.ssh/soccerpub_key_rsa'
+set :ssh_options, {
+    keys: '~/.ssh/cloud9_soccerpub_key_rsa',
+    forward_agent: true
+}
 
 # server-based syntax
 # ======================
