@@ -58,6 +58,7 @@ group :test do
  gem 'launchy', '~> 2.4.3'
  gem 'vcr'
  gem 'webmock'
+ gem 'database_rewinder'
 end
 
 group :production, :staging do

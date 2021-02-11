@@ -1,37 +1,9 @@
 <div class="text-center mb-4 pt-3">
   <h1>SoccerPubへようこそ！</h1>
 </div>
-
 <div class="row">
   <div class="col-sm-6 offset-sm-3">
-    
-    <%= form_with(model: @user, local: true) do |f| %>
-      <%= render 'layouts/error_messages', model: f.object %>
-      
-      <div class="form-group">
-        <%= f.label :name, 'ユーザー名' %>
-        <%= f.text_field :name, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :image, 'ユーザー画像' %>
-        <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png",  class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :email, 'メールアドレス' %>
-        <%= f.email_field :email, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password, 'パスワード' %>
-        <%= f.password_field :password, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation, '確認' %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
-      </div>
-      
-      <%= f.submit '登録する', class: 'btn btn-primary btn-block' %>
-    <% end %>
-    
+    <%= render 'users/signup_form', user: @user %>
     <script type="text/javascript">
       $("#user_image").bind("change", function() {
         var size_in_megabytes = this.files[0].size/1024/1024;

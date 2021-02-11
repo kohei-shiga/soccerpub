@@ -2,15 +2,7 @@
   <div class="toppage-main px-2 mt-5">
     <div class="toppage-main_inner">
       <div class="toppage-main_start ml-2">
-        <div>記事フィード</div>
-        <ul>
-          <li><%= link_to '最新', root_path %></li>
-          <% if logged_in? %>
-            <li><%= link_to 'タイムライン', timeline_articles_path %></li>
-            <li><%= link_to 'お気に入り', favorite_articles_articles_path %></li>
-            <li><%= link_to 'タグ', tagged_articles_articles_path %></li>
-          <% end %>
-        </ul>
+        <%= render 'article_feed' %>
       </div>
       <div class="toppage-main_end">
           <div class="toppage-main_end-header">
