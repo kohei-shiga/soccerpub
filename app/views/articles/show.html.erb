@@ -5,8 +5,8 @@
           <div class="article-show-header">
             <div class="header_info">
               <div class="author mr-3">
-                <div class="mr-2"><a href="<%= user_path(@article.user) %>"><img src="<%= gravatar_url(@article.user, { size: 30 }) %>"></a></div>
-                <div><a href="<%= user_path(@article.user) %>"><%= @article.user.name %></a></div>
+                <div class="mr-2"><a href="<%= user_path(@user) %>"><%= image_tag @user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if @user.image.attached? %></a></div>
+                <div><a href="<%= user_path(@user) %>"><%= @user.name %></a></div>
               </div>
               <div class="header_time"><span><%= @article.updated_at %></span></div>
             </div>
@@ -30,8 +30,8 @@
         </section>
         <div class="wrapper-container-article-footer border-top py-3">
           <div class="author mr-3">
-            <div class="mr-2"><a href="<%= user_path(@article.user) %>"><img src="<%= gravatar_url(@article.user, { size: 30 }) %>"></a></div>
-            <div><a href="<%= user_path(@article.user) %>"><%= @article.user.name %></a></div>
+            <div class="mr-2"><a href="<%= user_path(@user) %>"><%= image_tag @user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if @user.image.attached? %></a></div>
+            <div><a href="<%= user_path(@user) %>"><%= @user.name %></a></div>
           </div>
           <div class="mt-3">
             <%= render 'users/follow_form', user: @user %>

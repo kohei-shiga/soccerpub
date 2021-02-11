@@ -27,6 +27,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    counts(@user)
   end
 
   def update
@@ -55,6 +56,7 @@ class UsersController < ApplicationController
   def favorite_articles
     @user = User.find(params[:id])
     @articles = @user.favorite_articles.page(params[:page])
+    counts(@user)
   end
   
   private

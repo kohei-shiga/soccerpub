@@ -8,28 +8,7 @@
           <p>SoccerPubは、サッカーに関する話題を共有し、自分の応援するチームのファンと繋がれるアプリです。</p>
         </div>
         <div class="toppage-hero_end">
-          <%= form_with(model: @user, local: true) do |f| %>
-            
-            <div class="form-group">
-              <%= f.label :name, 'ユーザー名' %>
-              <%= f.text_field :name, class: 'form-control' %>
-            </div>
-            <div class="form-group">
-              <%= f.label :email, 'メールアドレス' %>
-              <%= f.email_field :email, class: 'form-control' %>
-            </div>
-            <div class="form-group">
-              <%= f.label :password, 'パスワード' %>
-              <%= f.password_field :password, class: 'form-control' %>
-            </div>
-            <div class="form-group">
-              <%= f.label :password_confirmation, '確認' %>
-              <%= f.password_field :password_confirmation, class: 'form-control' %>
-            </div>
-            
-            <%= f.submit '登録する', class: 'btn btn-primary' %>
-            
-          <% end %>
+          <%= render 'users/signup_form', user: @user %>
         </div>
       </div>
     </div>
@@ -38,15 +17,7 @@
     <h1>SendGrid</h1>
     <div class="toppage-main_inner">
       <div class="toppage-main_start ml-2">
-        <div>記事フィード</div>
-        <ul>
-          <li><%= link_to '最新', root_path %></li>
-          <% if logged_in? %>
-            <li><%= link_to 'タイムライン', timeline_articles_path %></li>
-            <li><%= link_to 'お気に入り', favorite_articles_articles_path %></li>
-            <li><%= link_to 'タグ', tagged_articles_articles_path %></li>
-          <% end %>
-        </ul>
+        <%= render 'articles/article_feed' %>
       </div>
       <div class="toppage-main_end">
         <% if @search %>
