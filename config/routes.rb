@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'articles#index'
- 
+  
+  get 'auth/:provider/callback', to: 'sessions#omniauth'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
@@ -28,7 +29,6 @@ Rails.application.routes.draw do
   resources :favorites, only: [:create, :destroy]
   resources :tags, only: [:show]
   resources :tag_follows, only: [:create, :destroy]
-  
   resources :searches, only: [:index]
 
 end

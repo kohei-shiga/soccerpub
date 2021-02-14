@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_120638) do
+ActiveRecord::Schema.define(version: 2021_02_12_040922) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -110,6 +110,9 @@ ActiveRecord::Schema.define(version: 2021_01_26_120638) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.string "uid"
+    t.string "provider"
+    t.string "auth_image"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
