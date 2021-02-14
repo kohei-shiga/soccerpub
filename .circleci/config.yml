@@ -6,11 +6,14 @@ jobs:
         environment:
           - BUNDLER_VERSION: 2.1.2
           - RAILS_ENV: 'test'
+          - SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
           
       - image: circleci/mysql:5.7
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           - MYSQL_ROOT_HOST: '%'
+          
+      - image: selenium/standalone-chrome:3.5.3
 
     working_directory: ~/soccerpub
 
