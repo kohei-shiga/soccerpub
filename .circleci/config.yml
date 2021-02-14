@@ -25,6 +25,7 @@ jobs:
             export CHROME_BIN=/usr/bin/google-chrome
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             sudo dpkg -i google-chrome*.deb
+            sudo apt-get install -f
       
       - restore_cache:
           keys:
@@ -68,7 +69,7 @@ jobs:
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
               circleci tests split --split-by=timings)"
               
-            bundle exec rspec \
+            RAILS_ENV=test bundle exec rspec \
               --format progress \
               --format RspecJunitFormatter \
               --out /tmp/test-results/rspec.xml \

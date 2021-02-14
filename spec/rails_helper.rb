@@ -48,7 +48,6 @@ RSpec.configure do |config|
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.clean_with :truncation
 
-  # exampleが終わる度に実行
   config.after(:each) do
     DatabaseCleaner.clean
   end
