@@ -76,18 +76,11 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
   config.include LoginModule
-  config.before(:each) do |example|
-    if example.metadata[:type] == :system
-      if ENV["SELENIUM_DRIVER_URL"].present?
-        driven_by :selenium, using: :chrome,
-                           options: {
-                               browser: :remote,
-                               url: ENV.fetch("SELENIUM_DRIVER_URL"),
-                               desired_capabilities: :chrome}
-      else
-        driven_by :selenium, using: :headless_chrome, screen_size: [1280, 800], options: { options: ["headless", "disable-gpu", "no-sandbox", "disable-dev-shm-usage"] }
-      end
-    end
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+  config.before(:each, type: :system, js: true) do
+      driven_by :selenium, using: :headless_chrome, screen_size: [1280, 800], options: { options: ["headless", "disable-gpu", "no-sandbox", "disable-dev-shm-usage"] }
   end
 end
 
