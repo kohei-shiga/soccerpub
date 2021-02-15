@@ -5,6 +5,7 @@
         <div class="article-header-right">
           <%= link_to user_path(article.user) do %>
             <%= image_tag article.user.index_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if article.user.image.attached? %>
+            <img src="<%= article.user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="30" height="30">
           <% end %>
           <%= link_to article.user.name, user_path(article.user) %>
         </div>

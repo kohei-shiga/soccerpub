@@ -4,9 +4,10 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
+require 'database_cleaner/active_record'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -35,6 +36,7 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -42,7 +44,13 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
+  DatabaseCleaner.strategy = :truncation
+  DatabaseCleaner.clean_with :truncation
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -68,10 +76,11 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
   config.include LoginModule
-  config.before(:each) do |example|
-    if example.metadata[:type] == :system
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+  config.before(:each, type: :system, js: true) do
       driven_by :selenium, using: :headless_chrome, screen_size: [1280, 800], options: { options: ["headless", "disable-gpu", "no-sandbox", "disable-dev-shm-usage"] }
-    end
   end
 end
 

@@ -2,21 +2,32 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.0-node-browsers
+      - image: circleci/ruby:2.7.0-node-browsers-legacy
         environment:
           - BUNDLER_VERSION: 2.1.2
           - RAILS_ENV: 'test'
-          
+
       - image: circleci/mysql:5.7
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           - MYSQL_ROOT_HOST: '%'
-
+          
     working_directory: ~/soccerpub
 
     steps:
       - checkout
       
+      - run:
+          name: Install System Dependencies
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libgbm1
+            sudo apt-get install -y libappindicator1 fonts-liberation
+            export CHROME_BIN=/usr/bin/google-chrome
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome*.deb
+            sudo apt-get install -f
+
       - restore_cache:
           keys:
             - rails-demo-yarn-{{ checksum "yarn.lock" }}
@@ -59,7 +70,7 @@ jobs:
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
               circleci tests split --split-by=timings)"
               
-            bundle exec rspec \
+            RAILS_ENV=test bundle exec rspec \
               --format progress \
               --format RspecJunitFormatter \
               --out /tmp/test-results/rspec.xml \

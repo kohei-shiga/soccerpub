@@ -40,6 +40,7 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
+  gem 'pry'
 end
 
 group :development do
@@ -59,6 +60,8 @@ group :test do
  gem 'vcr'
  gem 'webmock'
  gem 'database_rewinder'
+ gem 'capybara-screenshot'
+ gem 'database_cleaner-active_record'
 end
 
 group :production, :staging do
@@ -70,8 +73,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari'
 gem 'faker'
 gem 'dotenv-rails'
-
+gem 'omniauth'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2'
+gem 'carrierwave'
+gem 'fog'
 gem 'aws-sdk-s3', require: false
+gem 'sendgrid-ruby'
 
 #本番環境で消した
 # group :production do

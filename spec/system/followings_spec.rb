@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Followings", type: :system do
+RSpec.describe "Followings", type: :system, js: true do
   let(:user) { create(:user) }
   let(:other_users) { create_list(:user, 20) }
   

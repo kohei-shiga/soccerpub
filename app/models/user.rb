@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    # mount_uploader :auth_image, ImageUploader
     attr_accessor :remember_token, :activation_token, :reset_token
     before_save :downcase_email
     before_create :create_activation_digest
@@ -26,7 +27,7 @@ class User < ApplicationRecord
     
     validates :email, presence: true, length: { maximum: 255 },
                       format: { with: VALID_EMAIL_REGEX, allow_blank: true }, uniqueness: { case_sensitive: false }
-    validates :password, presence: true, length: { minimum: 8, maximum: 20 }, allow_nil: true 
+    validates :password, presence: true, length: { minimum: 8 }, allow_nil: true 
     
     def feed
         Article.where("user_id IN (?) OR user_id = ?", following_ids, id)

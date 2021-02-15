@@ -142,14 +142,11 @@ RSpec.describe User, type: :model do
           expect(@user.errors[:password]).to include("can't be blank")
         end
       end
-      context "when password length is less than 7 or more than 21" do
+      context "when password length is less than 7" do
         it "is invalid" do
           @user.password = @user.password_confirmation = "a" * 7
           expect(@user).to be_invalid
           expect(@user.errors[:password]).to include("is too short (minimum is 8 characters)")
-          @user.password = @user.password_confirmation = "a" * 21
-          expect(@user).to be_invalid
-          expect(@user.errors[:password]).to include("is too long (maximum is 20 characters)")
         end
       end
     end

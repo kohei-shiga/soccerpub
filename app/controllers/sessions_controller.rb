@@ -1,6 +1,24 @@
 class SessionsController < ApplicationController
   def new
   end
+  
+  def omniauth
+    user = User.find_or_create_by(uid: auth['uid'], provider: auth['provider']) do |u|
+      u.name = auth['info']['name']
+      u.email = auth['info']['email']
+      u.auth_image = auth['info']['image']
+      u.password = SecureRandom.hex(16)
+    end
+    if user.valid?
+      user.activate unless user.activated?
+      log_in(user)
+      flash[:success] = 'ログインしました。'
+      redirect_to root_url
+    else
+      flash.now[:danger] = 'ログインに失敗しました。'
+      render :new
+    end
+  end
 
   def create
     email = params[:session][:email].downcase
@@ -39,5 +57,9 @@ class SessionsController < ApplicationController
     else
       return false
     end
+  end
+  
+  def auth
+    request.env['omniauth.auth']
   end
 end

@@ -2,6 +2,7 @@
       <div class="card-body">
         <div class="text-center">
           <%= image_tag user.display_image, class: 'rounded rounded-circle img-fluid border border-dark' if user.image.attached? %>
+          <img src="<%= user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark">
         </div>
         <h4 class="card-title text-center mt-3"><%= user.name %></h4>
         <div class="flex mt-3">
