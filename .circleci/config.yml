@@ -20,13 +20,13 @@ jobs:
       - run:
           name: Install System Dependencies
           command: |
-            sudo yum update
-            sudo yum install -y libgbm1
-            sudo yum install -y libappindicator1 fonts-liberation
+            sudo apt-get update
+            sudo apt-get install -y libgbm1
+            sudo apt-get install -y libappindicator1 fonts-liberation
             export CHROME_BIN=/usr/bin/google-chrome
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             sudo dpkg -i google-chrome*.deb
-            sudo yum install -f
+            sudo apt-get install -f
 
       - restore_cache:
           keys:
