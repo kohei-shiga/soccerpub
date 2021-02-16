@@ -76,8 +76,6 @@ gem 'dotenv-rails'
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
-gem 'carrierwave'
-gem 'fog'
 gem 'aws-sdk-s3', require: false
 gem 'sendgrid-ruby'
 

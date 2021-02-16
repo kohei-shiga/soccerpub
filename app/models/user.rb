@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-    # mount_uploader :auth_image, ImageUploader
     attr_accessor :remember_token, :activation_token, :reset_token
     before_save :downcase_email
     before_create :create_activation_digest
