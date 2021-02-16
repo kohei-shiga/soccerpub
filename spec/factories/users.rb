@@ -15,5 +15,6 @@ FactoryBot.define do
     trait :with_articles do
       after(:create) { |user| create_list(:article, 5, user: user)}
     end
+    
   end
 end

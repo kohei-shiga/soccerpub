@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Relationships", type: :request do
+RSpec.describe "Before_Action", type: :request do
   context "when user not logged in" do
     
     context "user create relationship" do
@@ -9,8 +9,7 @@ RSpec.describe "Relationships", type: :request do
       it "doesn't change Relationship's count" do
         expect { post_request }.to change(Relationship, :count).by(0)
       end
-      
-      it "redirects to login_url" do
+      it "redirect to login url" do
         expect(post_request).to redirect_to login_url
       end
     end
@@ -25,8 +24,7 @@ RSpec.describe "Relationships", type: :request do
       it "doesn't change Relationship's count" do
         expect { delete_request }.to change(Relationship, :count).by(0)
       end
-      
-      it "redirects to login_url" do
+       it "redirect to login url" do
         expect(delete_request).to redirect_to login_url
       end
     end
