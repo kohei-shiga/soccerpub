@@ -4,17 +4,17 @@ class User < ApplicationRecord
     before_create :create_activation_digest
     has_secure_password
     has_one_attached :image
-    has_many :articles
+    has_many :articles, dependent: :destroy
     
-    has_many :relationships
+    has_many :relationships, dependent: :destroy
     has_many :followings, through: :relationships, source: :follow
-    has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
+    has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
     has_many :followers, through: :reverses_of_relationship, source: :user
     
-    has_many :favorites
+    has_many :favorites, dependent: :destroy
     has_many :favorite_articles, through: :favorites, source: :article
     
-    has_many :tag_follows
+    has_many :tag_follows, dependent: :destroy
     has_many :following_tags, through: :tag_follows, source: :tag
     
     validates :name, presence: true, length: { maximum: 20 }
