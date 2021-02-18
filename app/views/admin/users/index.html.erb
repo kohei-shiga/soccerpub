@@ -1,0 +1,24 @@
+<div class="container">
+  <ul class="list-unstyled ml-3">
+    <% @users.each do |user| %>
+      <li class="media border-bottom mb-2">
+        <div class="media-body">
+          <div class="mb-2">
+            <%= link_to user_path(user), class: 'mr-2' do %>
+              <%= image_tag user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if user.image.attached? %>
+              <img src="<%= user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="40" height="40">
+              <span class="h5"><%= user.name %></span>
+            <% end %>
+          </div>
+          <div class="mb-3">
+            <%= link_to 'View profile', user_path(user), class: 'btn btn-success' %>
+            <% if user.admin == false %>
+              <%= link_to '削除', user_path(user), method: :delete, data: { confirm: "#{user.name}を削除します" }, class: 'btn btn-danger' %>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%= paginate @users %>
+</div>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:edit, :update, :followings, :followers, :favorite_articles]
-  
+  before_action :require_user_logged_in, only: [:edit, :update, :destroy, :followings, :followers, :favorite_articles]
+  before_action :admin_user, only: [:destroy]
   
   def new
     @user = User.new
@@ -41,6 +41,12 @@ class UsersController < ApplicationController
     end
   end
   
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to admin_users_path
+  end
+  
   def followings
     @user = User.find(params[:id])
     @followings = @user.followings.page(params[:page])
@@ -64,4 +70,11 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :image, :email, :password, :password_confirmation, :introduction)
   end
+  
+  def admin_user
+    if !current_user.admin?
+      redirect_to root_url
+    end
+  end
+      
 end

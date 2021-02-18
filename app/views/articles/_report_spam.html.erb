@@ -1,0 +1,26 @@
+<div class="report-spam-container">
+  <% if logged_in? %>
+    <% if !current_user.report_spam?(article) %>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <span class="fa fa-ellipsis-h fa-lg"></span>
+          </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="dropdown-item">
+                <%= form_with(model: current_user.report_spams.build, local: true) do |f| %>
+                  <%= hidden_field_tag :article_id, article.id %>
+                  <%= f.submit '問題がある記事を報告する', class: 'btn btn-danger' %>
+                <% end %>
+              </li>
+              <li class="dropdown-item">
+                <% if current_user.admin? %>
+                  <%= link_to "記事を削除する", destroy_spam_article_admin_user_path(article), method: :delete, class: 'btn btn-secondary' %>
+                <% end %>
+              </li>
+            </ul>
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
+</div>

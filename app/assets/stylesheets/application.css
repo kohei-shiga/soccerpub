@@ -67,7 +67,7 @@
 /* _article.html.erb*/
 .user-article {
   width: 100%;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: 16px;
 }
 
@@ -140,6 +140,7 @@
  .toppage-main {
    padding-top: 32px;
  }
+ 
  .toppage-main_inner {
    display: flex;
    flex-flow: row wrap;
@@ -267,6 +268,16 @@
   color: #333;
 }
 
+.tag-container {
+  position: relative;
+}
+
+.report-spam-container {
+  position: absolute;
+  right: 0;
+  bottom: 0
+}
+
 @media (max-width: 1200px) {
   .wrapper-container-article {
     max-width: 1000px;
@@ -320,3 +331,8 @@
 .media-body div a:hover {
   color: blue;
 }
+
+/* spams.html.erb */
+.spams {
+   padding-top: 0px;
+ }

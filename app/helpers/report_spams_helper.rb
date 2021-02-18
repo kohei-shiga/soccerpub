@@ -1,0 +1,2 @@
+module ReportSpamsHelper
+end
