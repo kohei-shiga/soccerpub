@@ -14,6 +14,9 @@ class User < ApplicationRecord
     has_many :favorites, dependent: :destroy
     has_many :favorite_articles, through: :favorites, source: :article
     
+    has_many :report_spams, dependent: :destroy
+    has_many :reported_spam_articles, through: :report_spams, source: :article
+    
     has_many :tag_follows, dependent: :destroy
     has_many :following_tags, through: :tag_follows, source: :tag
     
@@ -58,6 +61,14 @@ class User < ApplicationRecord
     
     def favorite?(article)
         self.favorite_articles.include?(article)
+    end
+    
+    def report_spam(article)
+        self.report_spams.find_or_create_by(article_id: article.id)
+    end
+    
+    def report_spam?(article)
+        self.reported_spam_articles.include?(article)
     end
     
     def tag_follow(tag)

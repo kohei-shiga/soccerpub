@@ -58,7 +58,7 @@ class ArticlesController < ApplicationController
   
   def correct_user
     @article = current_user.articles.find_by(id: params[:id])
-    unless @article
+    if !@article
       redirect_to root_url
     end
   end

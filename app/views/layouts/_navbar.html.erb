@@ -24,6 +24,7 @@
                 <li class="dropdown-item"><%= link_to 'マイページ', user_path(current_user) %></li>
                 <% if current_user.admin %>
                   <li class="dropdown-item"><%= link_to 'ユーザー一覧', admin_users_path %></li>
+                  <li class="dropdown-item"><%= link_to 'スパム報告一覧', spams_admin_users_path %></li>
                 <% end %>
                 <li class="dropdown-divider"></li>
                 <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete %></li>

@@ -15,7 +15,14 @@ Rails.application.routes.draw do
     end
   end
   namespace :admin do
-    resources :users, only: [:index]
+    resources :users, only: [:index] do
+      collection do
+        get :spams
+      end
+      member do
+        delete :destroy_spam_article
+      end
+    end
   end
   
   resources :account_activations, only: [:edit]
@@ -34,5 +41,6 @@ Rails.application.routes.draw do
   resources :tags, only: [:show]
   resources :tag_follows, only: [:create, :destroy]
   resources :searches, only: [:index]
+  resources :report_spams, only: [:create, :destroy]
 
 end
