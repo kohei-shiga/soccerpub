@@ -9,7 +9,7 @@ RSpec.describe "Password_reset", type: :system do
   
   def extract_confirmation_url(mail)
     body = mail.body.encoded
-    body[/http:\/\/localhost:8080\/password_resets\/.*/]
+    body[/http:\/\/localhost:3000\/password_resets\/.*/]
   end
   
   it 'user can reset password correctly' do

@@ -31,3 +31,7 @@ yarn-debug.log*
 .yarn-integrity
 
 .env
+Dockerfile
+docker-compose.yml
+entrypoint.sh
+soccerpub.code-workspace

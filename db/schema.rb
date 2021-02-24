@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 2021_02_17_005620) do
     t.text "body", size: :long
     t.string "record_type", null: false
     t.bigint "record_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 2021_02_17_005620) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2021_02_17_005620) do
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "article_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["article_id"], name: "index_favorites_on_article_id"
     t.index ["user_id", "article_id"], name: "index_favorites_on_user_id_and_article_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2021_02_17_005620) do
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "follow_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["follow_id"], name: "index_relationships_on_follow_id"
     t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
     t.index ["user_id"], name: "index_relationships_on_user_id"
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 2021_02_17_005620) do
   create_table "report_spams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "article_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["article_id"], name: "index_report_spams_on_article_id"
     t.index ["user_id", "article_id"], name: "index_report_spams_on_user_id_and_article_id", unique: true
     t.index ["user_id"], name: "index_report_spams_on_user_id"
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 2021_02_17_005620) do
   create_table "tag_follows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["tag_id"], name: "index_tag_follows_on_tag_id"
     t.index ["user_id", "tag_id"], name: "index_tag_follows_on_user_id_and_tag_id", unique: true
     t.index ["user_id"], name: "index_tag_follows_on_user_id"
@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(version: 2021_02_17_005620) do
   create_table "tag_maps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tag_id", null: false
     t.bigint "article_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["article_id"], name: "index_tag_maps_on_article_id"
     t.index ["tag_id", "article_id"], name: "index_tag_maps_on_tag_id_and_article_id", unique: true
     t.index ["tag_id"], name: "index_tag_maps_on_tag_id"
@@ -103,16 +103,16 @@ ActiveRecord::Schema.define(version: 2021_02_17_005620) do
 
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.text "introduction"
     t.string "remember_digest"
     t.string "activation_digest"
