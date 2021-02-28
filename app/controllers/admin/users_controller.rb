@@ -20,8 +20,8 @@ class Admin::UsersController < ApplicationController
   private
   
   def admin_user
-    if !current_user.admin?
-      redirect_to root_url
-    end
+    return if current_user.admin?
+    
+    redirect_to root_url
   end
 end

@@ -11,6 +11,6 @@ class ReportSpam < ApplicationRecord
       spam_article = Article.find(spam.article_id)
       spam_articles << spam_article
     end
-    return spam_articles
+    spam_articles
   end
 end

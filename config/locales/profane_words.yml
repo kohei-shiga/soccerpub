@@ -1,0 +1,7 @@
+ja:
+  antivirus:
+    message: に不適切な単語が含まれています。
+    profane_words:
+      - 死ね
+      - キモイ
+      - バカ

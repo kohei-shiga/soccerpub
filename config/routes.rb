@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
     
   get 'signup', to: 'users#new'
-  resources :users, only: [:show, :create, :edit, :update, :destroy] do
+  resources :users, only: %i[show create edit update destroy] do
     member do
       get :followings
       get :followers
@@ -26,9 +26,9 @@ Rails.application.routes.draw do
   end
   
   resources :account_activations, only: [:edit]
-  resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :password_resets, only: %i[new create edit update]
   
-  resources :articles, only: [:show, :new, :create, :destroy] do
+  resources :articles, only: %i[show new create destroy] do
     collection do
       get :timeline
       get :favorite_articles
@@ -36,11 +36,10 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :relationships, only: [:create, :destroy]
-  resources :favorites, only: [:create, :destroy]
+  resources :relationships, only: %i[create destroy]
+  resources :favorites, only: %i[create destroy]
   resources :tags, only: [:show]
-  resources :tag_follows, only: [:create, :destroy]
+  resources :tag_follows, only: %i[create destroy]
   resources :searches, only: [:index]
-  resources :report_spams, only: [:create, :destroy]
-
+  resources :report_spams, only: %i[create destroy]
 end

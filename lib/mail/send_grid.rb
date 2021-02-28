@@ -1,7 +1,8 @@
 require 'sendgrid-ruby'
-include SendGrid
 
 class Mail::SendGrid
+  include SendGrid
+
   def initialize(settings)
     @settings = settings
   end
@@ -15,6 +16,6 @@ class Mail::SendGrid
 
     sg = SendGrid::API.new(api_key: @settings[:api_key])
     response = sg.client.mail._('send').post(request_body: sg_mail.to_json)
-    puts response.status_code
+    Rails.logger.debug response.status_code
   end
 end

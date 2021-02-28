@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
-    sequence(:name) { |n| "Test_User#{n}"}
-    sequence(:email) { |n| "Test#{n}@example.com"}
+    sequence(:name) { |n| "Test_User#{n}" }
+    sequence(:email) { |n| "Test#{n}@example.com" }
     password { "password" }
     password_confirmation { "password" }
     activated { true }
@@ -13,7 +13,7 @@ FactoryBot.define do
     end
     
     trait :with_articles do
-      after(:create) { |user| create_list(:article, 5, user: user)}
+      after(:create) { |user| create_list(:article, 5, user: user) }
     end
     
   end
