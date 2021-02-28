@@ -28,6 +28,5 @@ RSpec.describe "Password_reset", type: :system do
     fill_in '確認', with: 'newpassword'
     click_button 'パスワードを更新する'
     expect(page).to have_content 'パスワードの再設定を完了しました。'
-
   end
 end

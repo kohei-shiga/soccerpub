@@ -31,7 +31,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "spring-commands-rspec"
@@ -41,6 +41,8 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'pry'
+  gem 'rubocop'
+  gem 'rubocop-rails'
 end
 
 group :development do
@@ -53,23 +55,23 @@ group :development do
 end
 
 group :test do
- gem 'capybara'
- gem 'selenium-webdriver'
- gem 'webdrivers'
- gem 'launchy', '~> 2.4.3'
- gem 'vcr'
- gem 'webmock'
- gem 'database_rewinder'
- gem 'capybara-screenshot'
- gem 'database_cleaner-active_record'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
+  gem 'launchy', '~> 2.4.3'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'database_rewinder'
+  gem 'capybara-screenshot'
+  gem 'database_cleaner-active_record'
 end
 
 group :production, :staging do
-    gem 'unicorn'
+  gem 'unicorn'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'kaminari'
 gem 'faker'
 gem 'dotenv-rails'
@@ -78,8 +80,10 @@ gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
 gem 'aws-sdk-s3', require: false
 gem 'sendgrid-ruby'
+gem 'antivirus'
+gem 'rails-i18n'
 
-#本番環境で消した
+# 本番環境で消した
 # group :production do
 #   gem 'pg', '>= 0.18', '< 2.0'
 # end

@@ -1,0 +1,113 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+    - rubocop-rails
+
+AllCops:
+    Exclude:
+      - "tmp/**/*"
+      - "config/initializers/*"
+      - "vendor/**/*"
+      - "db/schema.rb"
+      - "node_modules/**/*"
+      - "db/migrate/*.rb"
+      - "bin/*"
+    DisplayCopNames: true
+    TargetRubyVersion: 2.7
+  
+Rails:
+    Enabled: true
+
+Style/AndOr:
+    EnforcedStyle: conditionals
+
+Style/AsciiComments:
+    Enabled: false
+
+Style/Documentation:
+    Enabled: false
+
+Style/NumericLiterals:
+    Enabled: false
+
+Style/ClassAndModuleChildren:   
+    Enabled: false
+
+Bundler/OrderedGems:
+    Enabled: false
+
+Lint/ShadowedException:
+    Enabled: false
+
+HashSyntax:
+    EnforcedStyle: ruby19
+
+Layout/TrailingEmptyLines:
+    Enabled: false
+
+Layout/TrailingWhitespace:
+    Enabled: false
+    
+Lint/SuppressedException:
+    Exclude:
+        - 'config/unicorn/production.rb'
+    
+Lint/UnusedBlockArgument:
+    Exclude:
+        - 'config/deploy.rb'
+        - 'config/unicorn/production.rb'
+
+Metrics/AbcSize:
+    Max: 33
+
+Metrics/BlockLength:
+    Max: 250
+
+Metrics/ClassLength:
+    Max: 150
+
+Metrics/MethodLength:
+    Max: 15
+
+Rails/FilePath:
+    Exclude:
+    - 'config/application.rb'
+    - 'config/environments/development.rb'
+
+Rails/HelperInstanceVariable:
+    Exclude:
+        - 'app/helpers/sessions_helper.rb'
+
+Rails/SkipsModelValidations:
+    Exclude:
+        - 'app/controllers/password_resets_controller.rb'
+        - 'app/models/user.rb'
+
+Style/BlockComments:
+    Exclude:
+        - 'spec/spec_helper.rb'
+
+Style/BlockDelimiters:
+    Enabled: false
+
+Style/FrozenStringLiteralComment:
+    Enabled: false
+
+Style/GlobalVars:
+    Exclude:
+        - 'config/unicorn/production.rb'
+
+Style/GlobalStdStream:
+    Exclude:
+        - 'config/environments/production.rb'
+
+Style/RegexpLiteral:
+    Exclude:
+        - 'spec/system/password_reset_spec.rb'
+        - 'spec/system/sign_up_spec.rb'
+
+Style/StringLiterals:
+    Enabled: false
+
+Layout/LineLength:
+    Max: 166

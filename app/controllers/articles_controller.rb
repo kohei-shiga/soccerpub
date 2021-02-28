@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :require_user_logged_in, only: [:new, :create, :destroy, :timeline, :favorite_articles, :tagged_articles]
-  before_action :correct_user, only: [:destroy]
+  before_action :require_user_logged_in, only: %i[new create destroy timeline favorite_articles tagged_articles]
+  before_action :correct_user, only: %i[destroy]
   
   def index
     @user = User.new
@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build(article_params)
     if @article.save
       tag_list = params[:tag_name].split(',')
-      tag_list.map!{ |o| o.strip }
+      tag_list.map!(&:strip)
       @article.save_articles(tag_list)
       flash[:success] = '記事を投稿しました。'
       redirect_to root_url
@@ -46,7 +46,7 @@ class ArticlesController < ApplicationController
   end
   
   def tagged_articles
-    articles = current_user.following_tags.map{ |o| o.tagged_articles.to_ary }.flatten.uniq
+    articles = current_user.following_tags.map { |o| o.tagged_articles.to_ary }.flatten.uniq
     @articles = Kaminari.paginate_array(articles).page(params[:page])
   end
   
@@ -58,8 +58,8 @@ class ArticlesController < ApplicationController
   
   def correct_user
     @article = current_user.articles.find_by(id: params[:id])
-    if !@article
-      redirect_to root_url
-    end
+    return if @article
+
+    redirect_to root_url
   end
 end

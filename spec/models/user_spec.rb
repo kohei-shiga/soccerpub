@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
         name: "Test",
         email: "test@example.com",
         password: "password",
-        password_confirmation: "password",
+        password_confirmation: "password"
       )
     end
   
@@ -21,21 +21,21 @@ RSpec.describe User, type: :model do
         it "is invalid" do
           @user.name = nil
           expect(@user).to be_invalid
-          expect(@user.errors[:name]).to include("can't be blank")
+          expect(@user.errors[:name]).to include("を入力してください")
         end
       end
       context "when name is empty" do
         it "is invalid" do
           @user.name = ''
           expect(@user).to be_invalid
-          expect(@user.errors[:name]).to include("can't be blank")
+          expect(@user.errors[:name]).to include("を入力してください")
         end
       end
       context "when name is space" do
         it "is invalid" do
           @user.name = ' '
           expect(@user).to be_invalid
-          expect(@user.errors[:name]).to include("can't be blank")
+          expect(@user.errors[:name]).to include("を入力してください")
         end
       end
       context "when name length is 20 characters or less" do
@@ -62,32 +62,34 @@ RSpec.describe User, type: :model do
         it "is invalid" do
           @user.email = nil
           expect(@user).to be_invalid
-          expect(@user.errors[:email]).to include("can't be blank")
+          expect(@user.errors[:email]).to include("を入力してください")
         end
       end
       context "when email is empty" do
         it "is invalid" do
           @user.email = ''
           expect(@user).to be_invalid
-          expect(@user.errors[:email]).to include("can't be blank")
+          expect(@user.errors[:email]).to include("を入力してください")
         end
       end
       context "when email is space" do
         it "is invalid" do
           @user.email = ' '
           expect(@user).to be_invalid
-          expect(@user.errors[:email]).to include("can't be blank")
+          expect(@user.errors[:email]).to include("を入力してください")
         end
       end
       context "when email length is 255 characters or less" do
         it "is valid" do
-          @user.email = 'a' * 243 + '@example.com'
+          email_first = 'a' * 243
+          @user.email = "#{email_first}@example.com"
           expect(@user).to be_valid
         end
       end
       context "when email length is more than 255 characters" do
         it "is invalid" do
-          @user.email = 'a' * 244 + '@example.com'
+          email_first = 'a' * 244
+          @user.email = "#{email_first}@example.com"
           expect(@user).to be_invalid
         end
       end
@@ -110,7 +112,7 @@ RSpec.describe User, type: :model do
           User.create(
             name: "alice",
             email: "alice@example.com",
-            password: "password",
+            password: "password"
           )
           @user.email = "alice@example.com"
           expect(@user).to be_invalid
@@ -133,20 +135,20 @@ RSpec.describe User, type: :model do
         it "is invalid" do
           @user.password = @user.password_confirmation = nil
           expect(@user).to be_invalid
-          expect(@user.errors[:password]).to include("can't be blank")
+          expect(@user.errors[:password]).to include("を入力してください")
           @user.password = @user.password_confirmation = ''
           expect(@user).to be_invalid
-          expect(@user.errors[:password]).to include("can't be blank")
+          expect(@user.errors[:password]).to include("を入力してください")
           @user.password = @user.password_confirmation = ' '
           expect(@user).to be_invalid
-          expect(@user.errors[:password]).to include("can't be blank")
+          expect(@user.errors[:password]).to include("を入力してください")
         end
       end
       context "when password length is less than 7" do
         it "is invalid" do
           @user.password = @user.password_confirmation = "a" * 7
           expect(@user).to be_invalid
-          expect(@user.errors[:password]).to include("is too short (minimum is 8 characters)")
+          expect(@user.errors[:password]).to include("は8文字以上で入力してください")
         end
       end
     end
@@ -172,9 +174,9 @@ RSpec.describe User, type: :model do
     end
     context "when user unfollow other_user" do
       it "succeeds" do
-          user.unfollow(other_user)
-          expect(user.following?(other_user)).to be false
-        end
+        user.unfollow(other_user)
+        expect(user.following?(other_user)).to be false
+      end
     end
     context "when other_user is followed by user" do
       it "succeeds" do

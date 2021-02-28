@@ -25,8 +25,7 @@ require 'database_cleaner/active_record'
 # require only the support files necessary.
 #
 # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -80,7 +79,7 @@ RSpec.configure do |config|
     driven_by :rack_test
   end
   config.before(:each, type: :system, js: true) do
-      driven_by :selenium, using: :headless_chrome, screen_size: [1280, 800], options: { options: ["headless", "disable-gpu", "no-sandbox", "disable-dev-shm-usage"] }
+    driven_by :selenium, using: :headless_chrome, screen_size: [1280, 800], options: { options: %w[headless disable-gpu no-sandbox disable-dev-shm-usage] }
   end
 end
 

@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  def new
-  end
+  def new; end
   
   def omniauth
     user = User.find_or_create_by(uid: auth['uid'], provider: auth['provider']) do |u|
@@ -44,18 +43,16 @@ class SessionsController < ApplicationController
   
   def login(email, password)
     @user = User.find_by(email: email)
-    if @user && @user.authenticate(password)
-      if @user.activated?
-        log_in(@user)
-        return true
-      else
-        message = "アカウントが有効化されていません。"
-        message += "アカウント有効化用のメールをご確認ください。"
-        flash.now[:warning] = message
-        return false
-      end
+    return false if @user == false || @user.authenticate(password) == false
+
+    if @user.activated?
+      log_in(@user)
+      true
     else
-      return false
+      message = "アカウントが有効化されていません。"
+      message += "アカウント有効化用のメールをご確認ください。"
+      flash.now[:warning] = message
+      false
     end
   end
   

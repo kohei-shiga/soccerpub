@@ -24,7 +24,7 @@ RSpec.describe "Before_Action", type: :request do
       it "doesn't change Relationship's count" do
         expect { delete_request }.to change(Relationship, :count).by(0)
       end
-       it "redirect to login url" do
+      it "redirect to login url" do
         expect(delete_request).to redirect_to login_url
       end
     end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:edit, :update, :destroy, :followings, :followers, :favorite_articles]
-  before_action :admin_user, only: [:destroy]
+  before_action :require_user_logged_in, only: %i[edit update destroy followings followers favorite_articles]
+  before_action :admin_user, only: %i[destroy]
   
   def new
     @user = User.new
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       flash[:success] = 'ユーザーを更新しました。'
       redirect_to @user
     else
@@ -72,9 +72,9 @@ class UsersController < ApplicationController
   end
   
   def admin_user
-    if !current_user.admin?
-      redirect_to root_url
-    end
+    return if current_user.admin?
+
+    redirect_to root_url
   end
       
 end
