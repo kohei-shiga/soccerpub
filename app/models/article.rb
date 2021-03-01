@@ -13,7 +13,7 @@ class Article < ApplicationRecord
   has_many :reverses_of_tag_maps, class_name: 'TagMap', dependent: :destroy
   has_many :attached_tags, through: :reverses_of_tag_maps, source: :tag
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   def save_articles(savearticle_tags)
     current_tags = attached_tags.pluck(:name) unless attached_tags.nil?

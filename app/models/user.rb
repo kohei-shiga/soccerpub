@@ -21,7 +21,7 @@ class User < ApplicationRecord
   has_many :tag_follows, dependent: :destroy
   has_many :following_tags, through: :tag_follows, source: :tag
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
   
   validates :name, presence: true, length: { maximum: 20 }
   validates :image, content_type: { in: %w[image/jpeg image/gif image/png],
