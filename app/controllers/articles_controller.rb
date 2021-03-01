@@ -11,6 +11,8 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @user = @article.user
     @count_favorites = @article.liked_users.count
+    @comments = @article.comments
+    @comment = Comment.new
   end
 
   def new
