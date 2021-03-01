@@ -34,6 +34,8 @@ Rails.application.routes.draw do
       get :favorite_articles
       get :tagged_articles
     end
+
+    resources :comments, only: [:create]
   end
   
   resources :relationships, only: %i[create destroy]

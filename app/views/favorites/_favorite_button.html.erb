@@ -1,9 +1,9 @@
 <% if logged_in? %>
   <div id="favorite_button">
     <% if current_user.favorite?(article) %>
-      <%= render 'unfavorite', article: article %>
+      <%= render 'articles/unfavorite', article: article %>
     <% else %>
-      <%= render 'favorite', article: article %>
+      <%= render 'articles/favorite', article: article %>
     <% end %>
   </div>
 <% end %>

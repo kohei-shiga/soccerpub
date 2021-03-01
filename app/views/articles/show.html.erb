@@ -24,7 +24,7 @@
               <li class="mr-2"><%= link_to tag.name, tag %></li>
             <% end %>
           </ul>
-          <%= render 'report_spam', article: @article %>
+          <%= render 'articles/report_spam', article: @article %>
         </div>
       </div>
       <section class="wrapper-container-article-content border-top py-3">
@@ -48,7 +48,36 @@
           <%= render 'users/follow_form', user: @user %>
         </div>
       </div>
-        
+    </div>
+
+    <div class="comment-container">
+      <div class="comment-container_list border my-3">
+        <h2 class="m-2">コメント一覧</h2>
+        <ul>
+          <% @comments.each do |comment| %>
+            <li>
+              <%= link_to user_path(comment.user) do %>
+                <%= image_tag comment.user.index_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if comment.user.image.attached? %>
+                <img src="<%= comment.user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="30" height="30">
+              <% end %>
+              <%= link_to comment.user.name, user_path(comment.user) %>
+              <%= comment.comment_content %>
+            </li>  
+          <% end %>
+        </ul>
+      </div>
+      <div class="comment-container_post mt-3">
+        <%= form_with(model: [@article, current_user.comments.build], local: true) do |f| %>
+          <%= render 'layouts/error_messages', model: @comment %>
+          <div class="form-group">
+            <%= f.label :comment_content, 'コメント', class: 'd-block' %>
+            <%= f.text_area :comment_content %>
+          </div>
+          <%= f.hidden_field :article_id, value: @article.id %>
+
+          <%= f.submit 'コメントする', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
