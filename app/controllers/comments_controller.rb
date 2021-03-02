@@ -4,12 +4,12 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comment_params)
     if @comment.save
-      redirect_back(fallback_location: root_path)
+      redirect_to article_url(@article)
     else
       render 'articles/show'
     end
   end
-
+  
   private
 
   def comment_params
