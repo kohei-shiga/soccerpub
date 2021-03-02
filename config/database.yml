@@ -15,8 +15,8 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   # docker configure
-  password: password
-  host: db
+  # password: password
+  # host: db
 
 development:
   <<: *default
@@ -63,6 +63,7 @@ production:
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
   host: <%= ENV['DB_HOSTNAME'] %>
+  charset: utf8
 
 # production:
 #   <<: *default
