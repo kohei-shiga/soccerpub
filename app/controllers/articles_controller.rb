@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
       flash[:success] = '記事を投稿しました。'
       redirect_to root_url
     else
-      flash.now[:danger] = 'メッセージの投稿に失敗しました。'
+      flash.now[:danger] = '記事の投稿に失敗しました。'
       render :new
     end
   end

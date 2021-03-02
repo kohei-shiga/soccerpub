@@ -2,8 +2,6 @@ class Article < ApplicationRecord
   has_rich_text :content
   belongs_to :user
 
-  validates :content, presence: true
-
   has_many :reverses_of_favorite, class_name: 'Favorite', dependent: :destroy
   has_many :liked_users, through: :reverses_of_favorite, source: :user
   

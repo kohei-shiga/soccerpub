@@ -67,7 +67,7 @@
         </ul>
       </div>
       <div class="comment-container_post mt-3">
-        <%= form_with(model: [@article, current_user.comments.build], local: true) do |f| %>
+        <%= form_with(model: [@article, current_user.comments.build], local: true, method: :post) do |f| %>
           <%= render 'layouts/error_messages', model: @comment %>
           <div class="form-group">
             <%= f.label :comment_content, 'コメント', class: 'd-block' %>
