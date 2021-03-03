@@ -43,7 +43,7 @@ class SessionsController < ApplicationController
   
   def login(email, password)
     @user = User.find_by(email: email)
-    return false if @user == false || @user.authenticate(password) == false
+    return unless @user&.authenticate(password)
 
     if @user.activated?
       log_in(@user)
@@ -54,6 +54,7 @@ class SessionsController < ApplicationController
       flash.now[:warning] = message
       false
     end
+    
   end
   
   def auth
