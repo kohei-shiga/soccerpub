@@ -1,4 +1,4 @@
-<div class="container">
+<div class="admin_users_index mt-4">
   <ul class="list-unstyled ml-3">
     <% @users.each do |user| %>
       <li class="media border-bottom mb-2">
@@ -13,7 +13,7 @@
           <div class="mb-3">
             <%= link_to 'View profile', user_path(user), class: 'btn btn-success' %>
             <% if user.admin == false %>
-              <%= link_to '削除', user_path(user), method: :delete, data: { confirm: "#{user.name}を削除します" }, class: 'btn btn-danger' %>
+              <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: "#{user.name}を削除します" }, class: 'btn btn-danger' %>
             <% end %>
           </div>
         </div>

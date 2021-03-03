@@ -1,3 +1,56 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.signup-container {
+  background-image: image-url('ronaldo.jpg');
+  background-size: cover;
+  background-color: rgba(255,255,255,0.4);
+  background-blend-mode: lighten;  
+  color: white;
+  background-position-x: center;
+  width: 100%
+}
+
+/* _users.html.erb */
+.media-body div a {
+  text-decoration: none;
+  color: #000;
+}
+.media-body div a:hover {
+  color: blue;
+}
+
+// _user_card.html.erb
+.card-body img {
+  max-width: 30%;
+  height: auto;
+}
+
+.card-body_flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-body_flex p {
+  width: 30%;
+  text-align: center;
+  font-size: 70%;
+}
+
+// followers followings.html.erb
+.box {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-color: #55c500;
+  margin-right: 8px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.title {
+  display: flex;
+  position: relative;
+}

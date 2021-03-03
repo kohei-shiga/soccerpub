@@ -15,8 +15,8 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   # docker configure
-  # password: password
-  # host: db
+  password: password
+  host: db
 
 development:
   <<: *default
@@ -48,14 +48,6 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-
-# production:
-#   adapter: postgresql
-#   encoding: unicode
-#   pool: 5
-#   database: soccerpub_production
-#   username: soccerpub
-#   password: <%= ENV['SOCCERPUB_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default

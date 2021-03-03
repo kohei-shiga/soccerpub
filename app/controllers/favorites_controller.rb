@@ -1,4 +1,5 @@
 class FavoritesController < ApplicationController
+  include CommonActions
   before_action :require_user_logged_in
   
   def create

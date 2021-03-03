@@ -3,7 +3,7 @@
     <div class="wrapper-container-article">
       <div class="wrapper-container-article-header">
         <div class="article-show-header">
-          <div class="header_info">
+          <div class="header_info mb-3">
             <div class="author mr-3">
               <div class="mr-2">
                 <%= link_to user_path(@user) do %>
@@ -13,7 +13,7 @@
               </div>
               <div><a href="<%= user_path(@user) %>"><%= @user.name %></a></div>
             </div>
-            <div class="header_time"><span><%= @article.updated_at %></span></div>
+            <div class="header_time ml-3"><span><%= l @article.created_at %> に投稿</span></div>
           </div>
         </div>
         <h3 class="article-show-header-title"><%= @article.title %></h3>
@@ -49,35 +49,6 @@
         </div>
       </div>
     </div>
-
-    <div class="comment-container">
-      <div class="comment-container_list border my-3">
-        <h2 class="m-2">コメント一覧</h2>
-        <ul>
-          <% @comments.each do |comment| %>
-            <li>
-              <%= link_to user_path(comment.user) do %>
-                <%= image_tag comment.user.index_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if comment.user.image.attached? %>
-                <img src="<%= comment.user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="30" height="30">
-              <% end %>
-              <%= link_to comment.user.name, user_path(comment.user) %>
-              <%= comment.comment_content %>
-            </li>  
-          <% end %>
-        </ul>
-      </div>
-      <div class="comment-container_post mt-3">
-        <%= form_with(model: [@article, current_user.comments.build], local: true, method: :post) do |f| %>
-          <%= render 'layouts/error_messages', model: @comment %>
-          <div class="form-group">
-            <%= f.label :comment_content, 'コメント', class: 'd-block' %>
-            <%= f.text_area :comment_content %>
-          </div>
-          <%= f.hidden_field :article_id, value: @article.id %>
-
-          <%= f.submit 'コメントする', class: 'btn btn-primary' %>
-        <% end %>
-      </div>
-    </div>
+      <%= render 'articles/comment', article: @article, comments: @comments, comment: @comment %>
   </div>
 </div>

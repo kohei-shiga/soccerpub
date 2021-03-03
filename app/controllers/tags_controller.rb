@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+  include CommonActions
   def show
     @tag = Tag.find(params[:id])
     @articles = @tag.tagged_articles.page(params[:page]).order(updated_at: :desc)

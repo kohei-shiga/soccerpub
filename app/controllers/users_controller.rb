@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: %i[edit update destroy followings followers favorite_articles]
-  before_action :admin_user, only: %i[destroy]
-  
+  include CommonActions
+  before_action :require_user_logged_in, only: %i[edit update destroy followings followers favorite_articles introduction]
+  before_action :set_user, only: %i[show edit update destroy followings followers favorite_articles introduction]
+  before_action :correct_user, only: %i[edit update destroy]
   def new
     @user = User.new
   end
 
   def show
-    @user = User.find(params[:id])
     @articles = @user.articles.page(params[:page])
     counts(@user)
   end
@@ -26,12 +26,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
     counts(@user)
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = 'ユーザーを更新しました。'
       redirect_to @user
@@ -42,25 +40,26 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path
+    redirect_to root_path
   end
   
   def followings
-    @user = User.find(params[:id])
     @followings = @user.followings.page(params[:page])
     counts(@user)
   end
   
   def followers
-    @user = User.find(params[:id])
     @followers = @user.followers.page(params[:page])
     counts(@user)
   end
   
   def favorite_articles
-    @user = User.find(params[:id])
+    @articles = @user.favorite_articles.page(params[:page])
+    counts(@user)
+  end
+
+  def introduction
     @articles = @user.favorite_articles.page(params[:page])
     counts(@user)
   end
@@ -70,9 +69,13 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :image, :email, :password, :password_confirmation, :introduction)
   end
-  
-  def admin_user
-    return if current_user.admin?
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def correct_user
+    return if current_user == @user
 
     redirect_to root_url
   end

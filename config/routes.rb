@@ -12,17 +12,16 @@ Rails.application.routes.draw do
       get :followings
       get :followers
       get :favorite_articles
+      get :introduction
     end
   end
   namespace :admin do
-    resources :users, only: [:index] do
+    resources :users, only: %i[index destroy]
+    resources :articles, only: [:destroy] do
       collection do
         get :spams
       end
-      member do
-        delete :destroy_spam_article
-      end
-    end
+    end 
   end
   
   resources :account_activations, only: [:edit]
