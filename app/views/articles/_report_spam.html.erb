@@ -15,7 +15,7 @@
               </li>
               <li class="dropdown-item">
                 <% if current_user.admin? %>
-                  <%= link_to "記事を削除する", destroy_spam_article_admin_user_path(article), method: :delete, class: 'btn btn-secondary' %>
+                  <%= link_to "記事を削除する", admin_article_path(article), method: :delete, class: 'btn btn-secondary' %>
                 <% end %>
               </li>
             </ul>

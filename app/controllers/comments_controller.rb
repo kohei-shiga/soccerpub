@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include CommonActions
+  before_action :require_user_logged_in
   before_action :set_article
 
   def create
@@ -20,6 +22,7 @@ class CommentsController < ApplicationController
     @article = Article.find(params[:article_id])
     @user = @article.user
     @count_favorites = @article.liked_users.count
+    @comment = Comment.new
     @comments = @article.comments
   end
 end

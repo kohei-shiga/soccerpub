@@ -1,3 +1,36 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.login-container {
+  background-image: image-url('pep.jpg');
+  background-size: cover;
+  background-color: rgba(255,255,255,0.4);
+  background-blend-mode: lighten;  
+  color: white;
+  background-position-x: center;
+  width: 100%;
+  height: 600px
+  }
+
+.login-container .row a {
+  color: black;
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+.checkbox span {
+    margin-left: 20px;
+    font-weight: normal;
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+#error_explanation ul #text {
+  display: none;
+}

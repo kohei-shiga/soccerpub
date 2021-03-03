@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  include CommonActions
   before_action :require_user_logged_in, only: %i[new create destroy timeline favorite_articles tagged_articles]
   before_action :correct_user, only: %i[destroy]
   

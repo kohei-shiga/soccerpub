@@ -1,0 +1,29 @@
+<div class="comment-container">
+  <div class="comment-container_list my-3">
+    <h2 class="m-2">コメント一覧</h2>
+    <ul>
+      <% comments.each do |comment| %>
+        <li>
+          <%= link_to user_path(comment.user) do %>
+          <%= image_tag comment.user.index_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if comment.user.image.attached? %>
+          <img src="<%= comment.user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="30" height="30">
+          <% end %>
+          <%= link_to comment.user.name, user_path(comment.user) %>
+          <p class="mt-1"><%= comment.comment_content %></p>
+        </li>  
+      <% end %>
+    </ul>
+  </div>
+  <div class="comment-container_post mt-3">
+    <%= form_with(model: [article, @comment], local: true, method: :post) do |f| %>
+      <%= render 'layouts/error_messages', model: @comment %>
+      <div class="form-group">
+        <%= f.label :comment_content, 'コメント', class: 'd-block' %>
+        <%= f.text_area :comment_content %>
+      </div>
+      <%= f.hidden_field :article_id, value: article.id %>
+
+      <%= f.submit 'コメントする', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

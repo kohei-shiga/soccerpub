@@ -12,7 +12,8 @@
       <li class="nav-item"><a href="<%= favorite_articles_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(favorite_articles_user_path(@user)) %>">お気に入り</a></li>
       <li class="nav-item"><a href="<%= introduction_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(introduction_user_path(@user)) %>">自己紹介</a></li>
     </ul>
-    <%= render 'articles/articles', articles: @articles, user: @user %>
+    
+    <p><%= @user.introduction %></p>
   </div>
 </div>
 

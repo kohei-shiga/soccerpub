@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mt-4">
   <div class="col-md-5">
     <%= render 'user_card', user: @user, count_followers: @count_followers, count_followings: @count_followings %>
   </div>
@@ -10,8 +10,8 @@
     <ul class="nav nav-tabs nav-justified mb-3">
       <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">My記事</a></li>
       <li class="nav-item"><a href="<%= favorite_articles_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(favorite_articles_user_path(@user)) %>">お気に入り</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">自己紹介</a></li>
-    </ul>
+      <li class="nav-item"><a href="<%= introduction_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(introduction_user_path(@user)) %>">自己紹介</a></li>
+      </ul>
     <%= render 'articles/articles', articles: @articles, user: @user %>
   </div>
 </div>
