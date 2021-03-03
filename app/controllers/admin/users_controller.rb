@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  include CommonActions
   before_action :admin_user
   
   def index

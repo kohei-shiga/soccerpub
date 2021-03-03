@@ -1,4 +1,5 @@
 class Admin::ArticlesController < ApplicationController
+  include CommonActions
   before_action :admin_user
   
   def spams
