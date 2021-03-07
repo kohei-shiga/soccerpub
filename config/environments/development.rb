@@ -65,4 +65,12 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::FileUpdateChecker
   config.hosts << "72d745960b5c4e0388a4348f8ffd7ad0.vfs.cloud9.ap-northeast-1.amazonaws.com"
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+  end
+  
 end

@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :admin_user
   
   def index
-    @users = User.all.page(params[:page])
+    @users = User.all.page(params[:page]).eager_load(image_attachment: :blob)
   end
 
   def destroy

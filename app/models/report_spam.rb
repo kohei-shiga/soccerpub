@@ -8,7 +8,7 @@ class ReportSpam < ApplicationRecord
   def self.spam_articles(spams)
     spam_articles = []
     spams.each do |spam|
-      spam_article = Article.find(spam.article_id)
+      spam_article = spam.article
       spam_articles << spam_article
     end
     spam_articles

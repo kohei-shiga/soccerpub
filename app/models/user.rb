@@ -4,6 +4,8 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_create :create_activation_digest
   has_secure_password
+  has_one :image_attachment, -> { where(name: 'image') }, class_name: "ActiveStorage::Attachment", as: :record, inverse_of: :record, dependent: false
+  has_one :image_blob, through: :image_attachment, class_name: "ActiveStorage::Blob", source: :blob
   has_one_attached :image
   has_many :articles, dependent: :destroy
   
