@@ -13,20 +13,20 @@ class Article < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
-  def save_articles(savearticle_tags)
-    current_tags = attached_tags.pluck(:name) unless attached_tags.nil?
-    old_tags = current_tags - savearticle_tags
-    new_tags = savearticle_tags - current_tags
+  # def save_articles(savearticle_tags)
+  #   current_tags = attached_tags.pluck(:name) unless attached_tags.nil?
+  #   old_tags = current_tags - savearticle_tags
+  #   new_tags = savearticle_tags - current_tags
     
-    old_tags.each do |old_name|
-      attached_tags.delete(Tag.find_by(name: old_name))
-    end
+  #   old_tags.each do |old_name|
+  #     attached_tags.delete(Tag.find_by(name: old_name))
+  #   end
     
-    new_tags.each do |new_name|
-      article_tag = Tag.find_or_create_by(name: new_name)
-      attached_tags << article_tag
-    end
-  end
+  #   new_tags.each do |new_name|
+  #     article_tag = Tag.find_or_create_by(name: new_name)
+  #     attached_tags << article_tag
+  #   end
+  # end
   
   def self.search(search)
     return Article.all if search == false

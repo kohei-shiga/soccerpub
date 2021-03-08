@@ -1,10 +1,10 @@
 <div class="new-articles mt-3">
-  <%= form_with(model: @article, local: true) do |f| %>
+  <%= form_with(model: @form, local: true) do |f| %>
     <div class="form-group bg-primary">
       <%= f.text_field :title, class: 'form-control', placeholder: 'タイトル' %>
     </div>
     <div class="form-group bg-secondary">
-      <input name="tag_name" class="form-control" placeholder="タグ">
+      <%= f.text_field :tag_names, class: 'form-control', placeholder: 'タグ' %>
     </div>
     <div class="form-group">
       <%= f.label :content, '内容' %>

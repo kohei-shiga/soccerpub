@@ -17,15 +17,13 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = current_user.articles.build
+    @form = ArticleForm.new
   end
 
   def create
-    @article = current_user.articles.build(article_params)
-    if @article.save
-      tag_list = params[:tag_name].split(',')
-      tag_list.map!(&:strip)
-      @article.save_articles(tag_list)
+    @form = ArticleForm.new(article_params)
+    if @form.valid?
+      @form.save
       flash[:success] = '記事を投稿しました。'
       redirect_to root_url
     else
@@ -56,7 +54,7 @@ class ArticlesController < ApplicationController
   private
   
   def article_params
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, :tag_names).merge(user_id: current_user.id)
   end
   
   def correct_user
