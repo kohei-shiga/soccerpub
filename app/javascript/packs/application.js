@@ -18,4 +18,4 @@ require("channels")
 
 require("trix")
 require("@rails/actiontext")
-import "../trix-editor-overrides"
+import "../trix-editor-overrides";

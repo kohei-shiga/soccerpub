@@ -26,14 +26,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   
   validates :name, presence: true, length: { maximum: 20 }
-  validates :image, content_type: { in: %w[image/jpeg image/gif image/png],
-                                    massage: "適切な画像フォーマットでなければなりません" },
-                    size: { less_than: 5.megabytes,
-                            message: "5MGよりも小さいサイズでなければなりません" }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
-  
-  validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX, allow_blank: true }, uniqueness: { case_sensitive: false }
+  validates :image, image: true
+  validates :email, presence: true, email: true
   validates :password, presence: true, length: { minimum: 8 }, allow_nil: true 
   
   def feed

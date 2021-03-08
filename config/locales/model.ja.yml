@@ -10,8 +10,16 @@ ja:
                 email: メールアドレス
                 password: パスワード
                 password_confirmation: パスワード確認
+                image: "画像"
             comment:
                 comment_content: コメントの内容
+        errors:
+            models:
+                user:
+                    attributes:
+                        image:
+                            type_error: "が適切なフォーマットではありません"
+                            size_error: "は5MBよりも小さいものにしてください"
 
     attributes:
         created_at: 作成日
