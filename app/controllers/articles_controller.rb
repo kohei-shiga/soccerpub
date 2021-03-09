@@ -39,7 +39,7 @@ class ArticlesController < ApplicationController
   end
   
   def timeline
-    @articles = current_user.feed.page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: {image_attachment: :blob})
+    @articles = Article.feed(current_user).page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: {image_attachment: :blob})
   end
   
   def favorite_articles

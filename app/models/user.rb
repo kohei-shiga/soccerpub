@@ -29,10 +29,6 @@ class User < ApplicationRecord
   validates :image, image: true
   validates :email, presence: true, email: true
   validates :password, presence: true, length: { minimum: 8 }, allow_nil: true 
-  
-  def feed
-    Article.where("user_id IN (?) OR user_id = ?", following_ids, id)
-  end
 
   def follow(other_user)
     return if self == other_user
@@ -144,6 +140,10 @@ class User < ApplicationRecord
   
   def navbar_display_image
     image.variant(resize_to_limit: [50, 50])
+  end
+
+  def to_param
+    name
   end
     
   private   
