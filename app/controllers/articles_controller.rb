@@ -22,8 +22,7 @@ class ArticlesController < ApplicationController
 
   def create
     @form = ArticleForm.new(article_params)
-    if @form.valid?
-      @form.save
+    if @form.save
       flash[:success] = '記事を投稿しました。'
       redirect_to root_url
     else

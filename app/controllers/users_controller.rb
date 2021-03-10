@@ -68,11 +68,16 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :image, :email, :password, :password_confirmation, :introduction)
+    params.require(:user).permit(:name, :friendly_id, :image, :email, :password, :password_confirmation, :introduction)
   end
 
   def set_user
-    @user = User.find(params[:id])
+    if params[:friendly_id].chr == '@'
+      params[:friendly_id].slice!(0)
+      @user = User.find_by(friendly_id: params[:friendly_id])
+    else
+      @user = User.find(params[:friendly_id])
+    end
   end
 
   def correct_user

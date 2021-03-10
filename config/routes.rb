@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
     
   get 'signup', to: 'users#new'
-  resources :users, only: %i[show create edit update destroy] do
+  resources :users, param: :friendly_id, only: %i[show create edit update destroy] do
     member do
       get :followings
       get :followers

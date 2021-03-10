@@ -18,7 +18,8 @@ class ArticleForm
     set_article
   end
 
-  def save 
+  def save
+    return false if invalid? 
     article.update!(title: title, content: content, user_id: user_id)
     tag_list = tag_names.split(',')
     tag_list.map!(&:strip)

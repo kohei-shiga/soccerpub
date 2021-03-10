@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
-  before_save :downcase_email
+  before_save :downcase_email, :friendly_id_nil
   before_create :create_activation_digest
   has_secure_password
   has_one :image_attachment, -> { where(name: 'image') }, class_name: "ActiveStorage::Attachment", as: :record, inverse_of: :record, dependent: false
@@ -27,8 +27,9 @@ class User < ApplicationRecord
   
   validates :name, presence: true, length: { maximum: 20 }
   validates :image, image: true
-  validates :email, presence: true, email: true
-  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true 
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, email: true
+  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
+  validates :friendly_id, friendly_id: true
 
   def follow(other_user)
     return if self == other_user
@@ -143,13 +144,17 @@ class User < ApplicationRecord
   end
 
   def to_param
-    name
+    friendly_id ? '@' + friendly_id : super()
   end
     
   private   
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def friendly_id_nil
+    self.friendly_id = nil if self.friendly_id.blank?
   end
 
   def create_activation_digest
