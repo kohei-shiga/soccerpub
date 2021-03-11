@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
   
   def index
     @user = User.new
-    @articles = Article.page(params[:page]).order(created_at: :desc)
+    @articles = Article.page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: { image_attachment: :blob })
   end
   
   def show
@@ -17,15 +17,12 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = current_user.articles.build
+    @form = ArticleForm.new
   end
 
   def create
-    @article = current_user.articles.build(article_params)
-    if @article.save
-      tag_list = params[:tag_name].split(',')
-      tag_list.map!(&:strip)
-      @article.save_articles(tag_list)
+    @form = ArticleForm.new(article_params)
+    if @form.save
       flash[:success] = '記事を投稿しました。'
       redirect_to root_url
     else
@@ -41,22 +38,22 @@ class ArticlesController < ApplicationController
   end
   
   def timeline
-    @articles = current_user.feed.page(params[:page])
+    @articles = Article.feed(current_user).page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: { image_attachment: :blob })
   end
   
   def favorite_articles
-    @articles = current_user.favorite_articles.page(params[:page])
+    @articles = current_user.favorite_articles.page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: { image_attachment: :blob })
   end
   
   def tagged_articles
-    articles = current_user.following_tags.map { |o| o.tagged_articles.to_ary }.flatten.uniq
+    articles = current_user.following_tags.preload(tagged_articles: [:attached_tags, user: { image_attachment: :blob }]).map { |o| o.tagged_articles.to_ary }.flatten.uniq.sort.reverse
     @articles = Kaminari.paginate_array(articles).page(params[:page])
   end
   
   private
   
   def article_params
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, :tag_names).merge(user_id: current_user.id)
   end
   
   def correct_user

@@ -3,12 +3,13 @@ class UsersController < ApplicationController
   before_action :require_user_logged_in, only: %i[edit update destroy followings followers favorite_articles introduction]
   before_action :set_user, only: %i[show edit update destroy followings followers favorite_articles introduction]
   before_action :correct_user, only: %i[edit update destroy]
+  
   def new
     @user = User.new
   end
 
   def show
-    @articles = @user.articles.page(params[:page])
+    @articles = @user.articles.page(params[:page]).preload(:attached_tags)
     counts(@user)
   end
 
@@ -45,17 +46,17 @@ class UsersController < ApplicationController
   end
   
   def followings
-    @followings = @user.followings.page(params[:page])
+    @followings = @user.followings.page(params[:page]).eager_load(image_attachment: :blob)
     counts(@user)
   end
   
   def followers
-    @followers = @user.followers.page(params[:page])
+    @followers = @user.followers.page(params[:page]).eager_load(image_attachment: :blob)
     counts(@user)
   end
   
   def favorite_articles
-    @articles = @user.favorite_articles.page(params[:page])
+    @articles = @user.favorite_articles.page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: { image_attachment: :blob })
     counts(@user)
   end
 
@@ -67,11 +68,16 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :image, :email, :password, :password_confirmation, :introduction)
+    params.require(:user).permit(:name, :friendly_id, :image, :email, :password, :password_confirmation, :introduction)
   end
 
   def set_user
-    @user = User.find(params[:id])
+    if params[:friendly_id].chr == '@'
+      params[:friendly_id].slice!(0)
+      @user = User.find_by(friendly_id: params[:friendly_id])
+    else
+      @user = User.find(params[:friendly_id])
+    end
   end
 
   def correct_user

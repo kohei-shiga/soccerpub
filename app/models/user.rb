@@ -1,9 +1,11 @@
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
-  before_save :downcase_email
+  before_save :downcase_email, :friendly_id_nil
   before_create :create_activation_digest
   has_secure_password
+  has_one :image_attachment, -> { where(name: 'image') }, class_name: "ActiveStorage::Attachment", as: :record, inverse_of: :record, dependent: false
+  has_one :image_blob, through: :image_attachment, class_name: "ActiveStorage::Blob", source: :blob
   has_one_attached :image
   has_many :articles, dependent: :destroy
   
@@ -24,19 +26,10 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   
   validates :name, presence: true, length: { maximum: 20 }
-  validates :image, content_type: { in: %w[image/jpeg image/gif image/png],
-                                    massage: "適切な画像フォーマットでなければなりません" },
-                    size: { less_than: 5.megabytes,
-                            message: "5MGよりも小さいサイズでなければなりません" }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
-  
-  validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX, allow_blank: true }, uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true 
-  
-  def feed
-    Article.where("user_id IN (?) OR user_id = ?", following_ids, id)
-  end
+  validates :image, image: true
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, email: true
+  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
+  validates :friendly_id, friendly_id: true
 
   def follow(other_user)
     return if self == other_user
@@ -149,11 +142,19 @@ class User < ApplicationRecord
   def navbar_display_image
     image.variant(resize_to_limit: [50, 50])
   end
+
+  def to_param
+    friendly_id ? "@#{friendly_id}" : super() 
+  end
     
   private   
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def friendly_id_nil
+    self.friendly_id = nil if friendly_id.blank?
   end
 
   def create_activation_digest

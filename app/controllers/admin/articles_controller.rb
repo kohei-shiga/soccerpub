@@ -3,7 +3,7 @@ class Admin::ArticlesController < ApplicationController
   before_action :admin_user
   
   def spams
-    spams = ReportSpam.all
+    spams = ReportSpam.all.preload(article: [:attached_tags, user: { image_attachment: :blob }])
     spam_articles = ReportSpam.spam_articles(spams)
     @spam_articles = Kaminari.paginate_array(spam_articles).page(params[:page])
   end

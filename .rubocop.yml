@@ -110,4 +110,8 @@ Style/StringLiterals:
     Enabled: false
 
 Layout/LineLength:
-    Max: 166
+    Max: 200
+
+Style/HashAsLastArrayItem:
+    EnforcedStyle: no_braces
+      
