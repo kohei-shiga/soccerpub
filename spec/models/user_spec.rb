@@ -195,13 +195,13 @@ RSpec.describe User, type: :model do
       
       it "contains other user's articles in the timeline page" do
         other_user.articles.each do |article|
-          expect(user.feed.include?(article)).to be_truthy
+          expect(Article.feed(user).include?(article)).to be_truthy
         end
       end
       
       it "contains the user's own articles in the timeline page" do
         user.articles.each do |article|
-          expect(user.feed.include?(article)).to be_truthy
+          expect(Article.feed(user).include?(article)).to be_truthy
         end
       end
     end
@@ -209,16 +209,14 @@ RSpec.describe User, type: :model do
     context "when user is not following other_user" do
       it "doesn't contain other user's articles in the timeline page" do
         other_user.articles.each do |article|
-          expect(user.feed.include?(article)).to be_falsy
+          expect(Article.feed(user).include?(article)).to be_falsy
         end
       end
       it "contains the user's own articles in the timeline page" do
         user.articles.each do |article|
-          expect(user.feed.include?(article)).to be_truthy
+          expect(Article.feed(user).include?(article)).to be_truthy
         end
       end
     end
   end
-  
-  
 end

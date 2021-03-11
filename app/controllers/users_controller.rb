@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
   
   def favorite_articles
-    @articles = @user.favorite_articles.page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: {image_attachment: :blob})
+    @articles = @user.favorite_articles.page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: { image_attachment: :blob })
     counts(@user)
   end
 

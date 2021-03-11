@@ -13,7 +13,7 @@ class Article < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   
-  scope :search, -> (search) { where(['title LIKE ?', "%#{search}%"]) if search.present? }
-  scope :feed, -> (user) { where("user_id IN (?) OR user_id = ?", user.following_ids, user.id)}
+  scope :search, ->(search) { where(['title LIKE ?', "%#{search}%"]) if search.present? }
+  scope :feed, ->(user) { where("user_id IN (?) OR user_id = ?", user.following_ids, user.id) }
   
 end

@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
   
   def index
     @user = User.new
-    @articles = Article.page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: {image_attachment: :blob})
+    @articles = Article.page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: { image_attachment: :blob })
   end
   
   def show
@@ -38,15 +38,15 @@ class ArticlesController < ApplicationController
   end
   
   def timeline
-    @articles = Article.feed(current_user).page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: {image_attachment: :blob})
+    @articles = Article.feed(current_user).page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: { image_attachment: :blob })
   end
   
   def favorite_articles
-    @articles = current_user.favorite_articles.page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: {image_attachment: :blob})
+    @articles = current_user.favorite_articles.page(params[:page]).order(created_at: :desc).preload(:attached_tags, user: { image_attachment: :blob })
   end
   
   def tagged_articles
-    articles = current_user.following_tags.preload(tagged_articles: [:attached_tags, user: {image_attachment: :blob}]).map { |o| o.tagged_articles.to_ary }.flatten.uniq.sort.reverse
+    articles = current_user.following_tags.preload(tagged_articles: [:attached_tags, user: { image_attachment: :blob }]).map { |o| o.tagged_articles.to_ary }.flatten.uniq.sort.reverse
     @articles = Kaminari.paginate_array(articles).page(params[:page])
   end
   

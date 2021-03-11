@@ -144,7 +144,7 @@ class User < ApplicationRecord
   end
 
   def to_param
-    friendly_id ? '@' + friendly_id : super()
+    friendly_id ? "@#{friendly_id}" : super() 
   end
     
   private   
@@ -154,7 +154,7 @@ class User < ApplicationRecord
   end
 
   def friendly_id_nil
-    self.friendly_id = nil if self.friendly_id.blank?
+    self.friendly_id = nil if friendly_id.blank?
   end
 
   def create_activation_digest

@@ -11,7 +11,7 @@ class ArticleForm
     validates :content
   end
 
-  def initialize(attributes={}, article: Article.new)
+  def initialize(attributes = {}, article: Article.new)
     @article = article
     attributes ||= default_attributes
     super(attributes)
@@ -20,6 +20,7 @@ class ArticleForm
 
   def save
     return false if invalid? 
+
     article.update!(title: title, content: content, user_id: user_id)
     tag_list = tag_names.split(',')
     tag_list.map!(&:strip)
@@ -58,5 +59,4 @@ class ArticleForm
   def content
     @rich_text_article.content
   end
-
 end
