@@ -22,6 +22,12 @@ class ArticleForm
     return false if invalid? 
 
     article.update!(title: title, content: content, user_id: user_id)
+    oembed_content = content.body.to_s
+    if oembed_content.include?("action-text-attachment")
+      oembed = ActionText::Oembed.last
+      oembed.article_id = article.id
+      oembed.save
+    end
     tag_list = tag_names.split(',')
     tag_list.map!(&:strip)
     current_tags = article.attached_tags.pluck(:name) unless article.attached_tags.nil?

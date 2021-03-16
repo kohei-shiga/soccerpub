@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_09_015351) do
+ActiveRecord::Schema.define(version: 2021_03_15_085621) do
+
+  create_table "action_text_oembeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "url"
+    t.json "raw_info"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "article_id"
+    t.index ["article_id"], name: "index_action_text_oembeds_on_article_id"
+  end
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -139,6 +148,7 @@ ActiveRecord::Schema.define(version: 2021_03_09_015351) do
     t.index ["friendly_id"], name: "index_users_on_friendly_id", unique: true
   end
 
+  add_foreign_key "action_text_oembeds", "articles"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "articles"

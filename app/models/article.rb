@@ -1,6 +1,7 @@
 class Article < ApplicationRecord
   has_rich_text :content
   belongs_to :user
+  has_many :oembed, class_name: 'ActionText::Oembed', dependent: :destroy
 
   has_many :reverses_of_favorite, class_name: 'Favorite', dependent: :destroy
   has_many :liked_users, through: :reverses_of_favorite, source: :user

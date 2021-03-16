@@ -83,6 +83,8 @@ gem 'aws-sdk-s3', require: false
 gem 'sendgrid-ruby'
 gem 'antivirus'
 gem 'rails-i18n'
+gem 'ruby-oembed'
+gem 'rack-cors'
 
 # 本番環境で消した
 # group :production do

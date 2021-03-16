@@ -19,5 +19,26 @@
   max-width: none;
 }
 
+a {
+  color: #333;
+}
 
+iframe {
+  width: 600px;
+  height: 400px;
+}
+
+@media (max-width: 650px) {
+  iframe {
+    width: 400px;
+    height: 266px;
+  }  
+}
+
+@media (max-width: 450px) {
+  iframe {
+    width: 300px;
+    height: 200px;
+  }  
+}
 
