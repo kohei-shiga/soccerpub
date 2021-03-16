@@ -43,4 +43,5 @@ Rails.application.routes.draw do
   resources :tag_follows, only: %i[create destroy]
   resources :searches, only: [:index]
   resources :report_spams, only: %i[create destroy]
+  resources :oembed, only: [:create]
 end

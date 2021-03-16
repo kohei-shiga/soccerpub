@@ -58,7 +58,7 @@ Lint/UnusedBlockArgument:
         - 'config/unicorn/production.rb'
 
 Metrics/AbcSize:
-    Max: 33
+    Max: 40
 
 Metrics/BlockLength:
     Max: 250
@@ -67,7 +67,7 @@ Metrics/ClassLength:
     Max: 150
 
 Metrics/MethodLength:
-    Max: 15
+    Max: 25
 
 Rails/FilePath:
     Exclude:
@@ -114,4 +114,12 @@ Layout/LineLength:
 
 Style/HashAsLastArrayItem:
     EnforcedStyle: no_braces
-      
+
+Lint/UselessAssignment:
+    Enabled: false
+
+Style/RescueStandardError:
+    Enabled: false
+
+Lint/AssignmentInCondition:
+    Enabled: false
