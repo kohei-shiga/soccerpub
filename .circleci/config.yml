@@ -9,7 +9,7 @@ jobs:
 
       - image: circleci/mysql:5.7
         environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_ROOT_PASSWORD: 'password'
           - MYSQL_ROOT_HOST: '%'
           
     working_directory: ~/soccerpub
