@@ -7,8 +7,12 @@
             <div class="author mr-3">
               <div class="mr-2">
                 <%= link_to user_path(@user) do %>
-                  <%= image_tag @user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if @user.image.attached? %>
-                  <img src="<%= @user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="40" height="40">
+                  <% if @user.image_attachment || @user.auth_image %>
+                    <%= image_tag @user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if @user.image.attached? %>
+                    <img src="<%= @user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="40" height="40">
+                  <% else %>
+                    <img src="<%= gravatar_url(@user, { size: 20 }) %>">
+                  <% end %>
                 <% end %>
               </div>
               <div><a href="<%= user_path(@user) %>"><%= @user.name %></a></div>
@@ -37,9 +41,11 @@
       <div class="wrapper-container-article-footer border-top py-3">
         <div class="author mr-3">
           <div class="mr-2">
-            <%= link_to user_path(@user) do %>
+            <% if @user.image_attachment || @user.auth_image %>
               <%= image_tag @user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if @user.image.attached? %>
               <img src="<%= @user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="40" height="40">
+            <% else %>
+              <img src="<%= gravatar_url(@user, { size: 20 }) %>">
             <% end %>
           </div>
           <div><a href="<%= user_path(@user) %>"><%= @user.name %></a></div>
