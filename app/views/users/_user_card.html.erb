@@ -1,8 +1,12 @@
 <div class="card py-3">
       <div class="card-body">
         <div class="text-center">
-          <%= image_tag user.display_image, class: 'rounded rounded-circle img-fluid border border-dark' if user.image.attached? %>
-          <img src="<%= user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark">
+          <% if @user.image_attachment || @user.auth_image %>
+            <%= image_tag user.display_image, class: 'rounded rounded-circle img-fluid border border-dark' if user.image.attached? %>
+            <img src="<%= user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark">
+          <% else %>
+            <img src="<%= gravatar_url(@user) %>">
+          <% end %>
         </div>
         <h4 class="card-title text-center mt-3"><%= user.name %></h4>
         <div class="card-body_flex mt-5">
