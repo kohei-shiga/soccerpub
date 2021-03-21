@@ -5,8 +5,13 @@
         <div class="media-body">
           <div class="mb-2">
             <%= link_to user_path(user), class: 'mr-2' do %>
-              <%= image_tag user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if user.image.attached? %>
-              <img src="<%= user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="40" height="40">
+              <% if user.image_attachment %>
+                <%= image_tag user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if user.image.attached? %>
+              <% elsif user.auth_image %> 
+                <img src="<%= user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="40" height="40">
+              <% else %>
+                <img src="<%= gravatar_url(current_user, { size: 30 }) %>">
+              <% end %>
               <span class="h5"><%= user.name %></span>
             <% end %>
           </div>

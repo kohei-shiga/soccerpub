@@ -17,8 +17,9 @@
         <% if logged_in? %>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-              <% if current_user.image_attachment || current_user.auth_image %>
-                <%= image_tag current_user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if current_user.image.attached? %>
+              <% if current_user.image_attachment %>
+                <%= image_tag current_user.navbar_display_image, class: 'rounded rounded-circle img-fluid border border-dark' %>
+              <% elsif current_user.auth_image %>
                 <img src="<%= current_user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="40" height="40">
               <% else %>
                 <img src="<%= gravatar_url(current_user, { size: 30 }) %>">
