@@ -4,8 +4,9 @@
       <header class="article-header">
         <div class="article-header-left">
           <%= link_to user_path(article.user) do %>
-            <% if article.user.image_attachment || article.user.auth_image %>
+            <% if article.user.image_attachment %>
               <%= image_tag article.user.index_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if article.user.image.attached? %>
+            <% elsif article.user.auth_image %>
               <img src="<%= article.user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="30" height="30">
             <% else %>
               <img src="<%= gravatar_url(article.user, { size: 20 }) %>">
