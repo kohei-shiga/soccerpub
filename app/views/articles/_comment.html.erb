@@ -5,8 +5,13 @@
       <% comments.each do |comment| %>
         <li>
           <%= link_to user_path(comment.user) do %>
-          <%= image_tag comment.user.index_display_image, class: 'rounded rounded-circle img-fluid border border-dark' if comment.user.image.attached? %>
-          <img src="<%= comment.user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="30" height="30">
+            <% if comment.user.image_attachment %>
+              <%= image_tag comment.user.index_display_image, class: 'rounded rounded-circle img-fluid border border-dark' %>
+            <% elsif comment.user.auth_image %>
+              <img src="<%= comment.user.auth_image %>" class="rounded rounded-circle img-fluid border border-dark" width="30" height="30">
+            <% else %>
+              <img src="<%= gravatar_url(current_user, { size: 30 }) %>">
+            <% end %>
           <% end %>
           <%= link_to comment.user.name, user_path(comment.user) %>
           <p class="mt-1"><%= comment.comment_content %></p>
