@@ -49,6 +49,11 @@ class ArticlesController < ApplicationController
     articles = current_user.following_tags.preload(tagged_articles: [:attached_tags, user: { image_attachment: :blob }]).map { |o| o.tagged_articles.to_ary }.flatten.uniq.sort.reverse
     @articles = Kaminari.paginate_array(articles).page(params[:page])
   end
+
+  def monthly_ranking
+    monthly_articles = Article.where(updated_at: Time.zone.today.all_month).preload(:attached_tags, user: { image_attachment: :blob })
+    @monthly_ranking_articles = Article.ranking(monthly_articles)
+  end
   
   private
   

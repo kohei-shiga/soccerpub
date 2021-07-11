@@ -15,6 +15,7 @@
           <%= link_to article.user.name, user_path(article.user) %>
         </div>
         <p class="ml-4 article-header-right"><%= l article.created_at %> に投稿</p>
+        <p class="ml-4"><i class="fas fa-heart mr-1"></i><%= article.liked_users.count %></p>
       </header>
       <h2><a href="<%= article_path(article) %>"><%= article.title %></a></h2>
       <div class="tag-container mt-3">

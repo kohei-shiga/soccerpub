@@ -22,14 +22,19 @@
           </div>
         </div>
         <h3 class="article-show-header-title"><%= @article.title %></h3>
-        <div class="tag-container">
-          <p>タグ</p>
-          <ul class="tag-field">
-            <% @article.attached_tags.each do |tag| %>
-              <li class="mr-2"><%= link_to tag.name, tag %></li>
-            <% end %>
-          </ul>
-          <%= render 'articles/report_spam', article: @article %>
+        <div class="tag-and-like">
+          <div class="tag-container">
+            <p>タグ</p>
+            <ul class="tag-field">
+              <% @article.attached_tags.each do |tag| %>
+                <li class="mr-2"><%= link_to tag.name, tag %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="likes">
+            <p class="mr-5"><%= @count_favorites %> likes!</p>
+            <%= render 'articles/report_spam', article: @article %>
+          </div>
         </div>
       </div>
       <section class="wrapper-container-article-content border-top py-3">
