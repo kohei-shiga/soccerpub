@@ -17,4 +17,8 @@ class Article < ApplicationRecord
   scope :search, ->(search) { where(['title LIKE ?', "%#{search}%"]) if search.present? }
   scope :feed, ->(user) { where("user_id IN (?) OR user_id = ?", user.following_ids, user.id) }
   
+  def self.ranking(monthly_articles)
+    articles = monthly_articles.sort { |a, b| b.liked_users.count <=> a.liked_users.count }
+    monthly_ranking_articles = articles.last(10)
+  end
 end

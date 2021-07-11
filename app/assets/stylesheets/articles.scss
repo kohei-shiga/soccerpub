@@ -162,6 +162,10 @@ padding: 0;
   color: #888;
 }
 
+.fa-heart {
+  color: #FF3366;
+}
+
 /* show.html.erb */
 .show-wrapper {
   background-color: #f6f6f4;
@@ -207,14 +211,22 @@ padding: 0;
   color: #333;
 }
 
-.tag-container {
+.tag-and-like {
   position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tag-container {
+  display: flex;
+}
+
+.likes {
+  display: flex;
 }
 
 .report-spam-container {
-  position: absolute;
-  right: 0;
-  bottom: 0
+  margin-bottom: 10px;
 }
 
 @media (max-width: 1200px) {

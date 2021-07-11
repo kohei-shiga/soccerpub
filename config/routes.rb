@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       get :timeline
       get :favorite_articles
       get :tagged_articles
+      get :monthly_ranking
     end
 
     resources :comments, only: [:create]
